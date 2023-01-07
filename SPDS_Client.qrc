@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/SPDS_Client">
+        <file>resources/logo/logo_txt.png</file>
+        <file>resources/logo/logo.png</file>
+        <file>resources/icon/detectionOff.png</file>
+        <file>resources/icon/historyOff.png</file>
+        <file>resources/icon/historyOn.png</file>
+        <file>resources/icon/sonOff.png</file>
+        <file>resources/icon/sonOn.png</file>
+        <file>resources/icon/visualizationOff.png</file>
+        <file>resources/icon/visualizationOn.png</file>
+        <file>resources/icon/detectionOn.png</file>
+        <file>resources/icon/close.png</file>
+        <file>resources/icon/maximize.png</file>
+        <file>resources/icon/minimize.png</file>
+        <file>resources/icon/install.png</file>
+        <file>resources/icon/detection_background.png</file>
+        <file>resources/icon/cameraStop.png</file>
+        <file>resources/icon/start.png</file>
+        <file>resources/icon/stop.png</file>
+        <file>resources/icon/detection_background_error.png</file>
+        <file>resources/icon/login.png</file>
+        <file>resources/qss/LoginShare.qss</file>
+        <file>resources/qss/MainWidget.qss</file>
+        <file>resources/font/Alibaba_PuHuiTi_2.0_55_Regular_55_Regular.ttf</file>
+    </qresource>
+</RCC>
