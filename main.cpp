@@ -6,6 +6,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     SPDS_Client w;
     w.show();
-    return a.exec();
+    return a.exec(); 
 }
-//李工：测试上传
+//6
