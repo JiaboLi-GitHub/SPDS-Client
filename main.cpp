@@ -8,4 +8,4 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec(); 
 }
-//6
+//6ภ๎นค6
