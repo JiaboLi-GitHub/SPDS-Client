@@ -16,12 +16,10 @@ public:
 signals:
     void goLogin();
 
-
 public slots:
     void on_login_clicked();
     void on_requestCode_clicked();
 
 private:
     Ui::EnrollClass ui;
-
 };

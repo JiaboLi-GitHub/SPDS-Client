@@ -34,7 +34,7 @@ SPDS_Client::SPDS_Client(QWidget *parent)
     detection->show();
 
     //Á¬½ÓÍøÂç
-    TcpSocket::connectToHost("192.168.1.5", 8888);
+    //TcpSocket::connectToHost("192.168.1.5", 8888);
 }
 
 SPDS_Client::~SPDS_Client()
@@ -169,6 +169,23 @@ void SPDS_Client::mouseReleaseEvent(QMouseEvent* event)
 void SPDS_Client::on_close_clicked()
 {
     this->close();
+}
+
+void SPDS_Client::on_minimize_clicked()
+{
+    this->showMinimized();
+}
+
+void SPDS_Client::on_maximize_clicked()
+{
+    if (this->isMaximized())
+    {
+        this->showNormal();
+    }
+    else
+    {
+        this->showMaximized();
+    }
 }
 
 /*---------------------------µÇÂ¼---------------------------------*/

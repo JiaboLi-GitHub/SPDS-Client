@@ -4,9 +4,9 @@
 
 class MessageJson
 {
-
 public:
-	static QByteArray verificationDataToQByteArrey(QString id);
-	
+	static QByteArray verificationDataToQByteArray(QString id);
+	static QByteArray loginDataToQByteArray(QString mailAddress, QString password);
+	static QByteArray enrollToQByteArray(QString mailAddress, QString password, QString userName, QString code);
 };
 

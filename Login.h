@@ -11,11 +11,13 @@ public:
     Login(QWidget *parent = nullptr);
     ~Login();
     void setStyle();
+    bool verifyInformation();
 
 signals:
     void goEnroll();
 
 public slots:
+    bool on_login_clicked();
     void on_enroll_clicked();
 
 private:

@@ -26,6 +26,8 @@ protected:
 public slots:
     void on_close_clicked();
     void on_login_clicked();
+    void on_minimize_clicked();
+    void on_maximize_clicked();
 
 private:
     Ui::SPDS_ClientClass ui;

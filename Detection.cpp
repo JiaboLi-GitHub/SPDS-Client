@@ -21,6 +21,7 @@ Detection::~Detection()
     delete videoSurface;
 }
 
+
 void Detection::on_start_clicked()
 {
     openSt  = !openSt;
@@ -37,7 +38,9 @@ void Detection::on_start_clicked()
 }
 
 /*-------------------------------摄像头------------------------------------*/
-//打开摄像头
+/*************************************************
+Description: 打开摄像头
+*************************************************/
 void Detection::startCamera()
 {
     QCameraInfo cameraInfo = QCameraInfo::availableCameras().at(0);
@@ -50,7 +53,9 @@ void Detection::startCamera()
     camera->start();
 }
 
-//关闭摄像头
+/*************************************************
+Description: 关闭摄像头
+*************************************************/
 void Detection::stopCamera()
 {
     ui.cameraStart->clear();
@@ -61,14 +66,17 @@ void Detection::stopCamera()
     videoSurface = NULL;
 }
 
-//每一帧
+/*************************************************
+Description: 将视频帧旋转后显示在界面上
+      Input: frame=视频帧
+*************************************************/
 void Detection::_presentframe(QVideoFrame& frame)
 {
     frame.map(QAbstractVideoBuffer::ReadOnly);
     img= QImage(frame.bits(), frame.width(), frame.height(), QVideoFrame::imageFormatFromPixelFormat(frame.pixelFormat())).copy();
     frame.unmap();
     
-    img.save("a.jpg");
+    //img.save("a.jpg");
 
 
     QMatrix matrix;
