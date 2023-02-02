@@ -34,7 +34,7 @@ SPDS_Client::SPDS_Client(QWidget *parent)
     detection->show();
 
     //Á¬½ÓÍøÂç
-    TcpSocket::connectToHost("192.168.1.5", 8888);
+    TcpSocket::connectToHost("192.168.1.8", 8888);
 }
 
 SPDS_Client::~SPDS_Client()
