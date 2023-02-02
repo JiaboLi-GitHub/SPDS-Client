@@ -171,6 +171,23 @@ void SPDS_Client::on_close_clicked()
     this->close();
 }
 
+void SPDS_Client::on_minimize_clicked()
+{
+    this->showMinimized();
+}
+
+void SPDS_Client::on_maximize_clicked()
+{
+    if (this->isMaximized())
+    {
+        this->showNormal();
+    }
+    else
+    {
+        this->showMaximized();
+    }
+}
+
 /*---------------------------µÇÂ¼---------------------------------*/
 void SPDS_Client::on_login_clicked()
 {

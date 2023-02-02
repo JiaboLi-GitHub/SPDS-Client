@@ -16,10 +16,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Widget Ui">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
     <Filter Include="Utility Class">
       <UniqueIdentifier>{7d12e8d6-488a-4d81-b6a2-05494cf4050e}</UniqueIdentifier>
     </Filter>
@@ -34,6 +30,10 @@
     </Filter>
     <Filter Include="Json">
       <UniqueIdentifier>{e8154b83-7a7d-49b6-a862-09311e11de16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Widget Ui">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>

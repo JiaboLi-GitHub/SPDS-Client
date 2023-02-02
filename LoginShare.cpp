@@ -20,28 +20,35 @@ LoginShare::~LoginShare()
 void LoginShare::setStyle()
 {
     ui.close->setFlat(true);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     this->setWindowFlags(Qt::FramelessWindowHint);
 
     QString qss = readQssFile(":/SPDS_Client/resources/qss/LoginShare.qss");
     this->setStyleSheet(qss);
 }
 
+/*************************************************
+Description: slotº¯Êý£¬×¢²áÒ³ÇÐ»»³ÉµÇÂ¼Ò³
+*************************************************/
 void LoginShare::openLogin()
 {
     delete enroll;
     enroll = NULL;
 
-    login = new Login(ui.widgetR);
+    login = new Login(ui.widgetMain);
     connect(login, &Login::goEnroll, this, &LoginShare::openEnroll);
     login->show();
 }
 
+/*************************************************
+Description: slotº¯Êý£¬µÇÂ¼Ò³ÇÐ»»³É×¢²áÒ³
+*************************************************/
 void LoginShare::openEnroll()
 {
     delete login;
     login = NULL;
 
-    enroll = new Enroll(ui.widgetR);
+    enroll = new Enroll(ui.widgetMain);
     connect(enroll, &Enroll::goLogin, this, &LoginShare::openLogin);
     enroll->show();
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>400</height>
+    <width>561</width>
+    <height>481</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>401</width>
-     <height>471</height>
+     <width>561</width>
+     <height>481</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -28,30 +28,11 @@
      <height>0</height>
     </size>
    </property>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>50</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>resources/logo/logo_txt.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="id">
+   <widget class="QLineEdit" name="mailAddress">
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>140</y>
+      <y>30</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -61,17 +42,20 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>190</y>
+      <y>130</y>
       <width>201</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="enroll">
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>290</y>
+      <y>240</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -84,31 +68,18 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>240</y>
+      <y>180</y>
       <width>201</width>
       <height>31</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>340</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>已有账号？</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="login">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>340</y>
-      <width>71</width>
+      <x>410</x>
+      <y>440</y>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -116,7 +87,7 @@
      <bool>false</bool>
     </property>
     <property name="text">
-     <string>直接登录</string>
+     <string>已有账号？直接登录</string>
     </property>
     <property name="default">
      <bool>false</bool>
@@ -129,9 +100,9 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>240</y>
+      <y>180</y>
       <width>93</width>
-      <height>28</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -139,6 +110,19 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="userName">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>80</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
   </widget>

@@ -11,7 +11,10 @@ public:
 
 public:
 	static bool connectToHost(QString ip, unsigned int port);
-	static long long write(const QByteArray& byteArray);
+	static qint64 write(const QByteArray& byteArray);
+	static bool isConnected();
+	static bool isReceived();
+	static QByteArray read();
 
 public:
 	static QTcpSocket *tcpSocket;

@@ -18,7 +18,8 @@ Enroll::~Enroll()
 
 void Enroll::setStyle()
 {
-    ui.id->setPlaceholderText(toUTF8("请输入手机号码"));
+    ui.mailAddress->setPlaceholderText(toUTF8("请输入邮箱地址"));
+    ui.userName->setPlaceholderText(toUTF8("请输入用户名"));
     ui.password->setPlaceholderText(toUTF8("请输入密码"));
     ui.code->setPlaceholderText(toUTF8("请输入验证码"));
 }
@@ -31,7 +32,7 @@ void Enroll::on_login_clicked()
 //用户获取验证码
 void Enroll::on_requestCode_clicked()
 {
-    QString mailAddress = ui.id->text();
-    QByteArray byteArray = MessageJson::verificationDataToQByteArrey(mailAddress);
+    QString mailAddress = ui.mailAddress->text();
+    QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
     TcpSocket::write(byteArray);
 }
