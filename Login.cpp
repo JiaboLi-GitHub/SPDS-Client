@@ -1,6 +1,7 @@
 #include "Login.h"
 
 #include <qmessagebox.h>
+#include <QtNetwork>
 
 #include "TcpSocket.h"
 #include "MessageJson.h"
@@ -44,14 +45,45 @@ bool Login::on_login_clicked()
 
     if (TcpSocket::isConnected()|| TcpSocket::connectToHost("127.0.0.1", 8888))
     {
-        
+        QByteArray byteArray = MessageJson::loginDataToQByteArray(mailAddress, password);
+        TcpSocket::write(byteArray);
+
+        if (TcpSocket::isReceived())
+        {
+            QByteArray receivedByteArray = TcpSocket::read();
+            QMap<QString,QString> receivedData = MessageJson::getResponseData(receivedByteArray);
+            switch (receivedData["LogIn_Response"].toInt())
+            {
+            case TcpData::Login_Response::Login_Correct:
+                QMessageBox::warning(NULL, u8"登录成功", u8"登录成功！", QMessageBox::Ok);
+                return true;
+
+            case TcpData::Login_Response::Account_Error:
+                QMessageBox::warning(NULL, u8"账号错误", u8"账号或密码错误！", QMessageBox::Ok);
+                break;
+            case TcpData::Login_Response::Login_error:
+                QMessageBox::warning(NULL, u8"未知错误", u8"请稍后重试！", QMessageBox::Ok);
+                break;
+            }
+        }
+        else 
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"服务器无回应，请稍后再试！", QMessageBox::Ok);
+        }
     }
     else
     {
-        QMessageBox::warning(NULL, toUTF8("网络错误"), toUTF8("请检查网络连接！"), QMessageBox::Ok);
+        QHostInfo info = QHostInfo::fromName("baidu.com");
+        if(info.error()!=QHostInfo::NoError)
+        {
+            QMessageBox::warning(NULL, toUTF8("网络错误"), toUTF8("请检查网络连接！"), QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器，请稍后再试！", QMessageBox::Ok);
+        }
     }
-
-    return true;
+    return false;
 }
 
 /*************************************************
@@ -83,12 +115,3 @@ bool Login::verifyInformation()
 
     return true;
 }
-
-/*************************************************
-Description: 服务器校验信息
-     Return: 校验是否通过
-*************************************************/
-//bool Login::serverVerify()
-//{
-//    
-//}
