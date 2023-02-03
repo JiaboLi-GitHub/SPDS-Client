@@ -54,7 +54,7 @@ void Enroll::on_requestCode_clicked()
         QString mailAddress = ui.mailAddress->text();
         QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
         TcpSocket::write(byteArray);
-        QMessageBox::warning(NULL, toUTF8("发送成功"), toUTF8("请检查您的邮箱！"), QMessageBox::Ok);
+        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("请查收您邮箱中的验证码！"), QMessageBox::Ok);
     }
     else
     {
