@@ -99,7 +99,7 @@ bool Enroll::on_enroll_clicked()
             switch (receivedData["Enroll_Response"].toInt())
             {
             case TcpData::Enroll_Response::Enroll_Correct:
-                QMessageBox::warning(NULL, u8"登录成功", u8"登录成功！", QMessageBox::Ok);
+                QMessageBox::warning(NULL, u8"注册成功", u8"注册成功！", QMessageBox::Ok);
                 return true;
 
             case TcpData::Enroll_Response::Exist_Error:
