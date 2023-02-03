@@ -6,19 +6,22 @@ public:
 	~TcpData();
 
 public:
+	//请求类型
 	enum RequestType
 	{
 		VerificationCode,	//请求发送验证码
-		Enroll,				//注册
-		LogIn				//登录	
+		Enroll_Request,		//注册
+		LogIn_Request		//登录
 	};
 
+	//响应类型
 	enum ResponseType
 	{
-		//	Enroll,
-		//	LogIn
+		Enroll_Response,	//注册
+		LogIn_Response		//登录
 	};
 
+	//注册响应类型
 	enum Enroll_Response
 	{
 		Enroll_Correct,		//注册成功
@@ -27,6 +30,7 @@ public:
 		Enroll_error		//未知错误
 	};
 
+	//登录响应类型
 	enum Login_Response
 	{
 		Login_Correct,		//登录成功
