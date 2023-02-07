@@ -28,6 +28,7 @@ public slots:
     void on_login_clicked();
     void on_minimize_clicked();
     void on_maximize_clicked();
+    void on_serverConfigButton_clicked();
 
 private:
     Ui::SPDS_ClientClass ui;

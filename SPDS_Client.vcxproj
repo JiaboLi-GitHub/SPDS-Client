@@ -101,6 +101,7 @@
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="LoginShare.cpp" />
     <ClCompile Include="MessageJson.cpp" />
+    <ClCompile Include="ServerConfig.cpp" />
     <ClCompile Include="SPDData.cpp" />
     <ClCompile Include="TcpData.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="VideoSurface.cpp" />
     <QtRcc Include="SPDS_Client.qrc" />
     <QtUic Include="Detection.ui" />
+    <QtUic Include="ServerConfig.ui" />
     <QtUic Include="Enroll.ui" />
     <QtUic Include="Login.ui" />
     <QtUic Include="LoginShare.ui" />
@@ -124,6 +126,7 @@
     <QtMoc Include="Login.h" />
     <ClInclude Include="MessageJson.h" />
     <ClInclude Include="resource.h" />
+    <QtMoc Include="ServerConfig.h" />
     <ClInclude Include="SPDData.h" />
     <ClInclude Include="TcpData.h" />
     <ClInclude Include="TcpSocket.h" />

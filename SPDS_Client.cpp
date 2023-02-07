@@ -14,6 +14,7 @@
 #include"Enroll.h"
 #include"LoginShare.h"
 #include"TcpSocket.h"
+#include"ServerConfig.h"
 using namespace utility;
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
@@ -34,7 +35,7 @@ SPDS_Client::SPDS_Client(QWidget *parent)
     detection->show();
 
     //Á¬½ÓÍøÂç
-    TcpSocket::connectToHost("192.168.1.8", 8888);
+    TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888);
 }
 
 SPDS_Client::~SPDS_Client()
@@ -121,12 +122,12 @@ void SPDS_Client::setUpMenuWidgetStyle()
     ui.close->setIcon(QIcon(":/SPDS_Client/resources/icon/close.png"));
     ui.maximize->setIcon(QIcon(":/SPDS_Client/resources/icon/maximize.png"));
     ui.minimize->setIcon(QIcon(":/SPDS_Client/resources/icon/minimize.png"));
-    ui.install->setIcon(QIcon(":/SPDS_Client/resources/icon/install.png"));
+    ui.serverConfigButton->setIcon(QIcon(":/SPDS_Client/resources/icon/install.png"));
     ui.login->setIcon(QIcon(":/SPDS_Client/resources/icon/login.png"));
     ui.close->setFlat(true);
     ui.maximize->setFlat(true);
     ui.minimize->setFlat(true);
-    ui.install->setFlat(true);
+    ui.serverConfigButton->setFlat(true);
     ui.login->setFlat(true);
 }
 
@@ -200,4 +201,10 @@ void SPDS_Client::on_login_clicked()
 
     LoginShare loginShare;
     loginShare.exec();
+}
+
+void SPDS_Client::on_serverConfigButton_clicked()
+{
+    ServerConfig serverconfig;
+    serverconfig.exec();
 }

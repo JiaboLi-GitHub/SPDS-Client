@@ -1,9 +1,11 @@
 #pragma once
 #include<qtcpsocket.h>
 #include<qbytearray.h>
+#include<qthread.h>
 
 
-class TcpSocket
+class TcpSocket:
+	public QThread
 {
 public:
 	TcpSocket();
