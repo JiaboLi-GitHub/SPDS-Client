@@ -63,8 +63,8 @@ void Enroll::on_requestCode_clicked()
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QString mailAddress = ui.mailAddress->text();
-        //QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
-        //TcpSocket::write(byteArray);
+        QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
+        TcpSocket::write(byteArray);
 
         countDown = 60;
         startTimer();
@@ -226,7 +226,7 @@ bool Enroll::verifyInformation()
 }
 
 /*************************************************
-Description: 更新验证码倒计时
+Description: 更新倒计时UI
 *************************************************/
 void Enroll::updateProgress()
 {
