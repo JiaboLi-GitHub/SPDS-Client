@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
-    <height>481</height>
+    <width>429</width>
+    <height>411</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,15 +18,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>561</width>
-     <height>481</height>
+     <width>431</width>
+     <height>411</height>
     </rect>
    </property>
    <widget class="QLineEdit" name="mailAddress">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>30</y>
+      <x>100</x>
+      <y>120</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -35,8 +35,8 @@
    <widget class="QLineEdit" name="password">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>90</y>
+      <x>100</x>
+      <y>180</y>
       <width>201</width>
       <height>31</height>
      </rect>
@@ -48,8 +48,8 @@
    <widget class="QPushButton" name="login">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>150</y>
+      <x>140</x>
+      <y>240</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -61,8 +61,8 @@
    <widget class="QPushButton" name="enroll">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>440</y>
+      <x>280</x>
+      <y>370</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -78,6 +78,30 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>阿里巴巴普惠体 2.0 55 Regular</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>欢迎使用SPDS</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

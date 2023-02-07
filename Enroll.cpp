@@ -1,10 +1,12 @@
 #include "Enroll.h"
-#include"TcpData.h"
-#include"TcpSocket.h"
-#include"MessageJson.h"
+#include "TcpData.h"
+#include "TcpSocket.h"
+#include "MessageJson.h"
+#include "ServerConfig.h"
 
 #include<qmessagebox.h>
 #include<qhostinfo.h>
+#include<thread>
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
 
@@ -49,12 +51,24 @@ void Enroll::on_requestCode_clicked()
         return;
     }
 
-    if (TcpSocket::isConnected() || TcpSocket::connectToHost("127.0.0.1", 8888))
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QString mailAddress = ui.mailAddress->text();
         QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
         TcpSocket::write(byteArray);
-        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("请查收您邮箱中的验证码！"), QMessageBox::Ok);
+        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("发送成功，请到邮箱获取验证码！"), QMessageBox::Ok);
+        std::thread emailCoolingDown([&]() {
+            ui.requestCode->setEnabled(false);
+            int time = 60;
+            while (time--)
+            {
+                ui.requestCode->setText(QString::number(time));
+                QThread::sleep(1);
+            }
+            ui.requestCode->setText(u8"获取验证码");
+            ui.requestCode->setEnabled(true);
+            });
+
     }
     else
     {
@@ -87,7 +101,7 @@ bool Enroll::on_enroll_clicked()
     QString userName = ui.userName->text();
     QString code = ui.code->text();
 
-    if (TcpSocket::isConnected() || TcpSocket::connectToHost("127.0.0.1", 8888))
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QByteArray byteArray = MessageJson::enrollToQByteArray(mailAddress, password,userName,code);
         TcpSocket::write(byteArray);
