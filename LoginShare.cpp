@@ -2,7 +2,7 @@
 #include"UtilityClass.h"
 using namespace utility;
 
-LoginShare::LoginShare(QWidget *parent)
+LoginShare::LoginShare(QWidget* parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
