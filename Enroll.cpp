@@ -6,15 +6,24 @@
 
 #include<qmessagebox.h>
 #include<qhostinfo.h>
-#include<thread>
+#include<qtimer.h>
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
+
+qint32 Enroll::countDown = 0;
 
 Enroll::Enroll(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
     setStyle();
+    qtimer = nullptr;
+    
+    if (countDown > 0)
+    {
+        ui.requestCode->setText(QString("%1S").arg(countDown));
+        startTimer();
+    }
 }
 
 Enroll::~Enroll()
@@ -54,21 +63,13 @@ void Enroll::on_requestCode_clicked()
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QString mailAddress = ui.mailAddress->text();
-        QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
-        TcpSocket::write(byteArray);
-        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("发送成功，请到邮箱获取验证码！"), QMessageBox::Ok);
-        std::thread emailCoolingDown([&]() {
-            ui.requestCode->setEnabled(false);
-            int time = 60;
-            while (time--)
-            {
-                ui.requestCode->setText(QString::number(time));
-                QThread::sleep(1);
-            }
-            ui.requestCode->setText(u8"获取验证码");
-            ui.requestCode->setEnabled(true);
-            });
+        //QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
+        //TcpSocket::write(byteArray);
 
+        countDown = 60;
+        startTimer();
+
+        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("发送成功，请到邮箱获取验证码！"), QMessageBox::Ok);
     }
     else
     {
@@ -222,4 +223,33 @@ bool Enroll::verifyInformation()
     }
 
     return true;
+}
+
+/*************************************************
+Description: 更新验证码倒计时
+*************************************************/
+void Enroll::updateProgress()
+{
+    ui.requestCode->setText(QString("%1S").arg(countDown));
+    if (--countDown <= 0)
+    {
+        ui.requestCode->setEnabled(true);
+        qtimer->stop();
+        ui.requestCode->setText(u8"获取验证码");
+    }
+}
+
+/*************************************************
+Description: 开始倒计时
+*************************************************/
+void Enroll::startTimer()
+{
+    if(qtimer == nullptr)
+    {
+        qtimer = new QTimer(this);
+        connect(qtimer, SIGNAL(timeout()), this, SLOT(updateProgress()));
+    }
+
+    ui.requestCode->setEnabled(false);
+    qtimer->start(1000);
 }
