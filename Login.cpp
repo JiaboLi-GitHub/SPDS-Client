@@ -5,6 +5,7 @@
 
 #include "TcpSocket.h"
 #include "MessageJson.h"
+#include "ServerConfig.h"
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
 
@@ -43,7 +44,7 @@ bool Login::on_login_clicked()
     QString mailAddress = ui.mailAddress->text();
     QString password = ui.password->text();
 
-    if (TcpSocket::isConnected()|| TcpSocket::connectToHost("127.0.0.1", 8888))
+    if (TcpSocket::isConnected()|| TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QByteArray byteArray = MessageJson::loginDataToQByteArray(mailAddress, password);
         TcpSocket::write(byteArray);

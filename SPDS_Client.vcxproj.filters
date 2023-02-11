@@ -81,6 +81,9 @@
     <ClCompile Include="MessageJson.cpp">
       <Filter>Json</Filter>
     </ClCompile>
+    <ClCompile Include="ServerConfig.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SPDS_Client.h">
@@ -99,6 +102,9 @@
       <Filter>Widget H</Filter>
     </QtMoc>
     <QtMoc Include="Login.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="ServerConfig.h">
       <Filter>Widget H</Filter>
     </QtMoc>
   </ItemGroup>
@@ -129,10 +135,13 @@
     <QtUic Include="Enroll.ui">
       <Filter>Widget Ui</Filter>
     </QtUic>
+    <QtUic Include="Login.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
     <QtUic Include="LoginShare.ui">
       <Filter>Widget Ui</Filter>
     </QtUic>
-    <QtUic Include="Login.ui">
+    <QtUic Include="ServerConfig.ui">
       <Filter>Widget Ui</Filter>
     </QtUic>
   </ItemGroup>

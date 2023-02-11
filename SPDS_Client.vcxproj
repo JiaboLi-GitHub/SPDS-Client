@@ -31,8 +31,8 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>Qt5.12.9</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick</QtModules>
+    <QtInstall>5.12.9_msvc2017_64</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -101,6 +101,7 @@
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="LoginShare.cpp" />
     <ClCompile Include="MessageJson.cpp" />
+    <ClCompile Include="ServerConfig.cpp" />
     <ClCompile Include="SPDData.cpp" />
     <ClCompile Include="TcpData.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="VideoSurface.cpp" />
     <QtRcc Include="SPDS_Client.qrc" />
     <QtUic Include="Detection.ui" />
+    <QtUic Include="ServerConfig.ui" />
     <QtUic Include="Enroll.ui" />
     <QtUic Include="Login.ui" />
     <QtUic Include="LoginShare.ui" />
@@ -124,6 +126,7 @@
     <QtMoc Include="Login.h" />
     <ClInclude Include="MessageJson.h" />
     <ClInclude Include="resource.h" />
+    <QtMoc Include="ServerConfig.h" />
     <ClInclude Include="SPDData.h" />
     <ClInclude Include="TcpData.h" />
     <ClInclude Include="TcpSocket.h" />

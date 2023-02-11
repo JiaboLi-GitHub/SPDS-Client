@@ -2,7 +2,7 @@
 #include"UtilityClass.h"
 using namespace utility;
 
-LoginShare::LoginShare(QWidget *parent)
+LoginShare::LoginShare(QWidget* parent)
     : QDialog(parent)
 {
     ui.setupUi(this);
@@ -28,7 +28,7 @@ void LoginShare::setStyle()
 }
 
 /*************************************************
-Description: slotº¯Êý£¬×¢²áÒ³ÇÐ»»³ÉµÇÂ¼Ò³
+Description: ×¢²áÒ³ÇÐ»»³ÉµÇÂ¼Ò³
 *************************************************/
 void LoginShare::openLogin()
 {
@@ -41,7 +41,7 @@ void LoginShare::openLogin()
 }
 
 /*************************************************
-Description: slotº¯Êý£¬µÇÂ¼Ò³ÇÐ»»³É×¢²áÒ³
+Description: µÇÂ¼Ò³ÇÐ»»³É×¢²áÒ³
 *************************************************/
 void LoginShare::openEnroll()
 {

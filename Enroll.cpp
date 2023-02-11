@@ -1,18 +1,29 @@
 #include "Enroll.h"
-#include"TcpData.h"
-#include"TcpSocket.h"
-#include"MessageJson.h"
+#include "TcpData.h"
+#include "TcpSocket.h"
+#include "MessageJson.h"
+#include "ServerConfig.h"
 
 #include<qmessagebox.h>
 #include<qhostinfo.h>
+#include<qtimer.h>
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
+
+qint32 Enroll::countDown = 0;
 
 Enroll::Enroll(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
     setStyle();
+    qtimer = nullptr;
+    
+    if (countDown > 0)
+    {
+        ui.requestCode->setText(QString("%1S").arg(countDown));
+        startTimer();
+    }
 }
 
 Enroll::~Enroll()
@@ -49,12 +60,16 @@ void Enroll::on_requestCode_clicked()
         return;
     }
 
-    if (TcpSocket::isConnected() || TcpSocket::connectToHost("127.0.0.1", 8888))
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QString mailAddress = ui.mailAddress->text();
         QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
-        TcpSocket::write (byteArray);
-        QMessageBox::warning(NULL, toUTF8("发送成功"), toUTF8("请检查您的邮箱！"), QMessageBox::Ok);
+        TcpSocket::write(byteArray);
+
+        countDown = 60;
+        startTimer();
+
+        QMessageBox::information(NULL, toUTF8("发送成功"), toUTF8("发送成功，请到邮箱获取验证码！"), QMessageBox::Ok);
     }
     else
     {
@@ -87,7 +102,7 @@ bool Enroll::on_enroll_clicked()
     QString userName = ui.userName->text();
     QString code = ui.code->text();
 
-    if (TcpSocket::isConnected() || TcpSocket::connectToHost("127.0.0.1", 8888))
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QByteArray byteArray = MessageJson::enrollToQByteArray(mailAddress, password,userName,code);
         TcpSocket::write(byteArray);
@@ -99,7 +114,7 @@ bool Enroll::on_enroll_clicked()
             switch (receivedData["Enroll_Response"].toInt())
             {
             case TcpData::Enroll_Response::Enroll_Correct:
-                QMessageBox::warning(NULL, u8"登录成功", u8"登录成功！", QMessageBox::Ok);
+                QMessageBox::warning(NULL, u8"注册成功", u8"注册成功！", QMessageBox::Ok);
                 return true;
 
             case TcpData::Enroll_Response::Exist_Error:
@@ -208,4 +223,33 @@ bool Enroll::verifyInformation()
     }
 
     return true;
+}
+
+/*************************************************
+Description: 更新倒计时UI
+*************************************************/
+void Enroll::updateProgress()
+{
+    ui.requestCode->setText(QString("%1S").arg(countDown));
+    if (--countDown <= 0)
+    {
+        ui.requestCode->setEnabled(true);
+        qtimer->stop();
+        ui.requestCode->setText(u8"获取验证码");
+    }
+}
+
+/*************************************************
+Description: 开始倒计时
+*************************************************/
+void Enroll::startTimer()
+{
+    if(qtimer == nullptr)
+    {
+        qtimer = new QTimer(this);
+        connect(qtimer, SIGNAL(timeout()), this, SLOT(updateProgress()));
+    }
+
+    ui.requestCode->setEnabled(false);
+    qtimer->start(1000);
 }

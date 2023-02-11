@@ -197,7 +197,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="install">
+    <widget class="QPushButton" name="serverConfigButton">
      <property name="geometry">
       <rect>
        <x>890</x>
@@ -249,6 +249,14 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>serverConfigButton</tabstop>
+  <tabstop>minimize</tabstop>
+  <tabstop>maximize</tabstop>
+  <tabstop>close</tabstop>
+  <tabstop>leftMenuTreeWidget</tabstop>
+  <tabstop>login</tabstop>
+ </tabstops>
  <resources>
   <include location="SPDS_Client.qrc"/>
  </resources>
