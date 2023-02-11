@@ -34,14 +34,13 @@ SPDS_Client::SPDS_Client(QWidget *parent)
     detection->show();
 
     //连接网络
-    TcpSocket::connectToHost("192.168.1.8", 8888);
+    TcpSocket::connectToHost("192.168.2.106", 8888);
 }
 
 SPDS_Client::~SPDS_Client()
 {
     
 }
-
 
 //设置样式
 void SPDS_Client::setStyle()
@@ -129,7 +128,6 @@ void SPDS_Client::setUpMenuWidgetStyle()
     ui.install->setFlat(true);
     ui.login->setFlat(true);
 }
-
 
 /*-------------------------使失去标题栏的窗体可移动----------------------------*/
 //鼠标按下事件
