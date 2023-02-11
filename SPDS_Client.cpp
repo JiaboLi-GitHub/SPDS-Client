@@ -18,7 +18,7 @@ using namespace utility;
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
 
-SPDS_Client::SPDS_Client(QWidget *parent)q
+SPDS_Client::SPDS_Client(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
