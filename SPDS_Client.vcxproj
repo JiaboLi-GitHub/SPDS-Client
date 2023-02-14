@@ -65,7 +65,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world440.lib;asmjit.lib;c10.lib;clog.lib;cpuinfo.lib;dnnl.lib;fbgemm.lib;kineto.lib;libprotobufd.lib;libprotobuf-lited.lib;libprotocd.lib;pthreadpool.lib;torch.lib;torch_cpu.lib;XNNPACK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\include;%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
