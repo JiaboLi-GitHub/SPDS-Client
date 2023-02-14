@@ -32,11 +32,11 @@ Visualization::Visualization(QWidget* parent)
 
 
     initListWidget(
-        listWidget, 9,
-        initQPieChartView("2023/2/14", 60, 70, 80, 90, 100, 1015),
-        initQPieChartView("2023/2/13", 15, 959, 192, 5652, 626, 12),
-        initQPieChartView("2023/2/12", 15, 15, 35, 13, 45, 05),
-        initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
+        listWidget,9, 
+        initQPieChartView("2023/2/14",60,70,80,90,100,1015),
+        initQPieChartView("2023/2/13",15,959,192,5652,626,12),
+        initQPieChartView("2023/2/12",15,15,35,13,45,05),
+        initQPieChartView("2023/2/11",19,12,65,95,26,25),
         initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
         initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
         initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
@@ -69,7 +69,7 @@ QChart* Visualization::initQLineChart()
 }
 
 QChartView* Visualization::initQPieChartView(QString date,
-    qint32 gesture1, qint32 gesture2, qint32 gesture3,
+    qint32 gesture1,qint32 gesture2, qint32 gesture3,
     qint32 gesture4, qint32 gesture5, qint32 gesture6)
 {
     //´´½¨±ýÍ¼
@@ -83,7 +83,7 @@ QChartView* Visualization::initQPieChartView(QString date,
     QChart* chart = new QChart();
     chart->addSeries(series);
     chart->setTitle(date);
-    chart->setMargins(QMargins(-10, -10, -10, -10));
+    chart->setMargins(QMargins(-10,-10,-10,-10));
     QChartView* chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     return chartView;
