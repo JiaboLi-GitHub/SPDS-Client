@@ -37,7 +37,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>5.12.9_msvc2017_64</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick</QtModules>
+    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -96,6 +96,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DailyDataDelegate.cpp" />
+    <ClCompile Include="Visualization.cpp" />
     <ClCompile Include="Detection.cpp" />
     <ClCompile Include="Enroll.cpp" />
     <ClCompile Include="Login.cpp" />
@@ -108,6 +110,7 @@
     <ClCompile Include="UtilityClass.cpp" />
     <ClCompile Include="VideoSurface.cpp" />
     <QtRcc Include="SPDS_Client.qrc" />
+    <QtUic Include="Visualization.ui" />
     <QtUic Include="Detection.ui" />
     <QtUic Include="ServerConfig.ui" />
     <QtUic Include="Enroll.ui" />
@@ -124,6 +127,8 @@
     <QtMoc Include="Enroll.h" />
     <QtMoc Include="LoginShare.h" />
     <QtMoc Include="Login.h" />
+    <QtMoc Include="Visualization.h" />
+    <QtMoc Include="DailyDataDelegate.h" />
     <ClInclude Include="MessageJson.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="ServerConfig.h" />
@@ -137,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\logo\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="server.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

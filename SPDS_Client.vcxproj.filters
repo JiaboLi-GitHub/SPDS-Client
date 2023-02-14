@@ -84,6 +84,12 @@
     <ClCompile Include="ServerConfig.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Visualization.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DailyDataDelegate.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SPDS_Client.h">
@@ -105,6 +111,12 @@
       <Filter>Widget H</Filter>
     </QtMoc>
     <QtMoc Include="ServerConfig.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="Visualization.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="DailyDataDelegate.h">
       <Filter>Widget H</Filter>
     </QtMoc>
   </ItemGroup>
@@ -144,6 +156,9 @@
     <QtUic Include="ServerConfig.ui">
       <Filter>Widget Ui</Filter>
     </QtUic>
+    <QtUic Include="Visualization.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SPDS_Client.rc">
@@ -154,5 +169,8 @@
     <Image Include="resources\logo\logo.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="server.ini" />
   </ItemGroup>
 </Project>
