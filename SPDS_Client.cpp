@@ -206,3 +206,8 @@ void SPDS_Client::on_serverConfigButton_clicked()
     ServerConfig serverconfig;
     serverconfig.exec();
 }
+
+void SPDS_Client::on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID)
+{
+
+}

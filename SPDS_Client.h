@@ -29,6 +29,8 @@ public slots:
     void on_minimize_clicked();
     void on_maximize_clicked();
     void on_serverConfigButton_clicked();
+    void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
+
 
 private:
     Ui::SPDS_ClientClass ui;

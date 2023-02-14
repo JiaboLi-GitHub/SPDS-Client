@@ -12,7 +12,7 @@ public:
 
 private slots:
     bool present(const QVideoFrame& frame) override;
-
+    
 signals:
     void presentframe_(QVideoFrame& frame);
 
