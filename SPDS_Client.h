@@ -31,10 +31,6 @@ public slots:
     void on_serverConfigButton_clicked();
     void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
 
-
-private slots:
-    void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
-
 private:
     void showDetection();
     void showVisualization();
