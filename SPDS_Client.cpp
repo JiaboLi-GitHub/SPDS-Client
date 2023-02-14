@@ -15,6 +15,7 @@
 #include"LoginShare.h"
 #include"TcpSocket.h"
 #include"ServerConfig.h"
+#include"Visualization.h"
 using namespace utility;
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
@@ -25,17 +26,11 @@ SPDS_Client::SPDS_Client(QWidget *parent)
     ui.setupUi(this);
     setStyle();     //设置样式
 
-    //显示主窗口
-    ui.mainWidget->setAttribute(Qt::WA_TranslucentBackground, true);
-    Detection *detection=new Detection(this);
-    int x = ui.mainWidget->x(), y = ui.mainWidget->y();
-    int w = ui.mainWidget->width(), h = ui.mainWidget->height();
-    detection->setGeometry(x, y, w, h);
-    detection->activateWindow();
-    detection->show();
+    location = Wait_For_Init;
+    showDetection();
 
     //连接网络
-    TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888);
+    //TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888);
 }
 
 SPDS_Client::~SPDS_Client()
@@ -86,29 +81,32 @@ void SPDS_Client::setLeftMenuTreeWidgetStyle()
     detection_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/detectionOn.png"), QIcon::Selected);
     detection_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/detectionOff.png"), QIcon::Normal);
     detection_treeWidgetItem->setIcon(0, detection_icon);
-
+    detection_treeWidgetItem->setData(0, Qt::UserRole, Loc_Detection);
 
     auto visualization_treeWidgetItem = new QTreeWidgetItem(QStringList(toUTF8(" 坐姿数据")));
     QIcon visualization_icon;
     visualization_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/visualizationOn.png"), QIcon::Selected);
     visualization_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/visualizationOff.png"), QIcon::Normal);
     visualization_treeWidgetItem->setIcon(0, visualization_icon);
+    visualization_treeWidgetItem->setData(0, Qt::UserRole, Loc_Visualization);
 
-    auto history_treeWidgetItem = new QTreeWidgetItem(QStringList(toUTF8(" 历史坐姿")));
-    QIcon history_icon;
-    history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOn.png"), QIcon::Selected);
-    history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOff.png"), QIcon::Normal);
-    history_treeWidgetItem->setIcon(0, history_icon);
+    //auto history_treeWidgetItem = new QTreeWidgetItem(QStringList(toUTF8(" 历史坐姿")));
+    //QIcon history_icon;
+    //history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOn.png"), QIcon::Selected);
+    //history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOff.png"), QIcon::Normal);
+    //history_treeWidgetItem->setIcon(0, history_icon);
+    
 
     auto son_treeWidgetItem = new QTreeWidgetItem(QStringList(toUTF8(" 亲子坐姿")));
     QIcon son_icon;
     son_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/sonOn.png"), QIcon::Selected);
     son_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/sonOff.png"), QIcon::Normal);
     son_treeWidgetItem->setIcon(0, son_icon);
+    son_treeWidgetItem->setData(0, Qt::UserRole, Loc_Familial);
 
     ui.leftMenuTreeWidget->addTopLevelItem(detection_treeWidgetItem);
     ui.leftMenuTreeWidget->addTopLevelItem(visualization_treeWidgetItem);
-    ui.leftMenuTreeWidget->addTopLevelItem(history_treeWidgetItem);
+    //ui.leftMenuTreeWidget->addTopLevelItem(history_treeWidgetItem);
     ui.leftMenuTreeWidget->addTopLevelItem(son_treeWidgetItem);
     ui.leftMenuTreeWidget->setFrameStyle(QFrame::NoFrame);       //隐藏边框
     ui.leftMenuTreeWidget->setHeaderHidden(true);           //隐藏标题栏
@@ -207,7 +205,55 @@ void SPDS_Client::on_serverConfigButton_clicked()
     serverconfig.exec();
 }
 
-void SPDS_Client::on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID)
+/*---------------------------页面切换---------------------------------*/
+void SPDS_Client::on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, qint32 itemID)
 {
+    qint32 selecter = indexItem->data(0, Qt::UserRole).toInt();
+    switch (selecter)
+    {
+    case Loc_Detection:showDetection(); break;
+    case Loc_Visualization:showVisualization(); break;
+    case Loc_Familial:showFamilial(); break;
+    default:assert(0);
+    }
+    return;
+}
 
+void SPDS_Client::showDetection()
+{
+    if (location == Loc_Detection)
+    {
+        return;
+    }
+    location = Loc_Detection;
+
+    Detection* detection = new Detection(this);
+    detection->setGeometry(ui.mainWidget->geometry());
+    delete ui.mainWidget;
+    ui.mainWidget = detection;
+    detection->show();
+}
+
+void SPDS_Client::showVisualization()
+{
+    if (location == Loc_Visualization)
+    {
+        return;
+    }
+    location = Loc_Visualization;
+
+    Visualization* visualization = new Visualization(this);
+    visualization->setGeometry(ui.mainWidget->geometry());
+    delete ui.mainWidget;
+    ui.mainWidget = visualization;
+    visualization->show();
+}
+
+void SPDS_Client::showFamilial()
+{
+    if (location == Loc_Familial)
+    {
+        return;
+    }
+    location = Loc_Familial;
 }

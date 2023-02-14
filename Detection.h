@@ -6,7 +6,7 @@
 #include <QCameraImageCapture>
 #include <QCameraInfo>
 #include "ui_Detection.h"
-#include"VideoSurface.h"
+#include "VideoSurface.h"
 
 class Detection : public QWidget
 {

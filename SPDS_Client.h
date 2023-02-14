@@ -32,9 +32,26 @@ public slots:
     void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
 
 
+private slots:
+    void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
+
 private:
+    void showDetection();
+    void showVisualization();
+    void showFamilial();
+
+private:
+    enum Location
+    {
+        Wait_For_Init,
+        Loc_Detection,
+        Loc_Visualization,
+        Loc_Familial
+    };
+
+    Location location;
     Ui::SPDS_ClientClass ui;
     //´°Ìå¿ÉÒÆ¶¯
     QPoint pLast;
-    bool m_bPressed;
+    bool m_bPressed; 
 };

@@ -109,6 +109,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DailyDataDelegate.cpp" />
+    <ClCompile Include="Visualization.cpp" />
     <ClCompile Include="Detection.cpp" />
     <ClCompile Include="Enroll.cpp" />
     <ClCompile Include="Login.cpp" />
@@ -121,6 +123,7 @@
     <ClCompile Include="UtilityClass.cpp" />
     <ClCompile Include="VideoSurface.cpp" />
     <QtRcc Include="SPDS_Client.qrc" />
+    <QtUic Include="Visualization.ui" />
     <QtUic Include="Detection.ui" />
     <QtUic Include="ServerConfig.ui" />
     <QtUic Include="Enroll.ui" />
@@ -137,6 +140,8 @@
     <QtMoc Include="Enroll.h" />
     <QtMoc Include="LoginShare.h" />
     <QtMoc Include="Login.h" />
+    <QtMoc Include="Visualization.h" />
+    <QtMoc Include="DailyDataDelegate.h" />
     <ClInclude Include="MessageJson.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="ServerConfig.h" />
@@ -150,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\logo\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="server.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
