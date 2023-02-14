@@ -22,8 +22,7 @@ void LoginShare::setStyle()
     ui.close->setFlat(true);
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setWindowFlags(Qt::FramelessWindowHint);
-    //ui.widgetBackground->setAttribute(Qt::WA_TintedBackground);
-    
+
     QString qss = readQssFile(":/SPDS_Client/resources/qss/LoginShare.qss");
     this->setStyleSheet(qss);
 }

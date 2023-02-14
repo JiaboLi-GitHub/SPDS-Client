@@ -12,13 +12,13 @@ class Visualization : public QWidget
 	Q_OBJECT
 
 public:
-	Visualization(QWidget *parent);
+	Visualization(QWidget* parent);
 	~Visualization();
 
 private:
 	Ui::VisualizationClass ui;
 	qint32 availableItem;
-	QtCharts::QChartView* mainWidget,*secondWidget,*thirdWidget;
+	QtCharts::QChartView* mainWidget, * secondWidget, * thirdWidget;
 	QListWidget* listWidget;
 	QChartView* initQPieChartView(QString date,
 		qint32 gesture1, qint32 gesture2, qint32 gesture3,

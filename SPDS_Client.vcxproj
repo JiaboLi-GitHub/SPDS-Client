@@ -36,9 +36,9 @@
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>Qt5.12.9</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts</QtModules>
-    <QtBuildConfig>debug</QtBuildConfig>
+    <QtInstall>5.12.9_msvc2017_64</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -55,32 +55,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\CODE\C++\OpenCV4.54\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>E:\Qt5.12.9\5.12.9\msvc2017_64\include\QtCharts;E:\Downloads\libtorch-win-shared-with-deps-1.13.1+cpu\libtorch\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Downloads\libtorch-win-shared-with-deps-1.13.1+cpu\libtorch\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\include;%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
-      <SDLCheck>false</SDLCheck>
-      <ConformanceMode>false</ConformanceMode>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Link>
-      <AdditionalDependencies>opencv_world454.lib;asmjit.lib;c10.lib;clog.lib;cpuinfo.lib;dnnl.lib;fbgemm.lib;kineto.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;pthreadpool.lib;torch.lib;torch_cpu.lib;XNNPACK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ClCompile>
-      <SDLCheck>false</SDLCheck>
-      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -105,7 +91,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

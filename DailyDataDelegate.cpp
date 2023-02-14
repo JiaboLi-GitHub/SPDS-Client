@@ -18,15 +18,12 @@ void DailyDataDelegate::paint(QPainter* painter, const QStyleOptionViewItem& opt
 
     //创建饼图
     QPieSeries* series = new QPieSeries();
-    series->append("正常", 20);
-    series->append("托头", 40);
-    series->append("前倾", 60);
-    series->append("后倾", 60);
-    series->append("左倾", 60);
-    series->append("右倾", 60);
+    series->append("First", 20);
+    series->append("Second", 40);
+    series->append("Third", 60);
     QChart* chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle(u8"2022/2/14");
+    chart->setTitle("Sample pie chart");
     QChartView* chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
