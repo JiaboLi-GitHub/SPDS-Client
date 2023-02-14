@@ -31,8 +31,8 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>Qt5.12.9</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick</QtModules>
+    <QtInstall>5.12.9_msvc2017_64</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
