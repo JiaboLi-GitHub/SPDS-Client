@@ -31,8 +31,8 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>5.12.9_msvc2017_64</QtInstall>
-    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts</QtModules>
+    <QtInstall>QT5.12.9</QtInstall>
+    <QtModules>core;network;gui;multimedia;widgets;concurrent;multimediawidgets;3dcore;3danimation;3dextras;3dinput;3dlogic;3drender;3dquick;charts;</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -55,8 +55,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\CODE\C++\OpenCV4.54\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Qt5.12.9\5.12.9\msvc2017_64\include\QtCharts;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Qt5.12.9\5.12.9\msvc2017_64\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <IncludePath>E:\Qt5.12.9\5.12.9\msvc2017_64\include\QtCharts;E:\Downloads\libtorch-win-shared-with-deps-1.13.1+cpu\libtorch\include;$(IncludePath)</IncludePath>
@@ -69,7 +69,7 @@
       </AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Downloads\libtorch-win-shared-with-deps-debug-1.13.1+cpu\libtorch\include;%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
     </ClCompile>

@@ -22,7 +22,10 @@
      <height>821</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="4,0,3">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="7,0,4">
+    <property name="spacing">
+     <number>2</number>
+    </property>
     <property name="sizeConstraint">
      <enum>QLayout::SetMinAndMaxSize</enum>
     </property>
@@ -30,7 +33,7 @@
      <number>40</number>
     </property>
     <property name="topMargin">
-     <number>40</number>
+     <number>20</number>
     </property>
     <property name="rightMargin">
      <number>40</number>
@@ -45,7 +48,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>500</height>
+          <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -53,6 +56,15 @@
           <width>16777215</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>阿里巴巴普惠体 2.0 55 Regular</family>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="renderHints">
+         <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
         </property>
        </widget>
       </item>
@@ -62,10 +74,30 @@
          <number>6</number>
         </property>
         <item>
-         <widget class="QChartView" name="secondWidget"/>
+         <widget class="QChartView" name="secondWidget">
+          <property name="font">
+           <font>
+            <family>阿里巴巴普惠体 2.0 55 Regular</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QChartView" name="thirdWidget"/>
+         <widget class="QChartView" name="thirdWidget">
+          <property name="font">
+           <font>
+            <family>阿里巴巴普惠体 2.0 55 Regular</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="renderHints">
+           <set>QPainter::Antialiasing|QPainter::TextAntialiasing</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
