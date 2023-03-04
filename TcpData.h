@@ -11,14 +11,17 @@ public:
 	{
 		VerificationCode,	//请求发送验证码
 		Enroll_Request,		//注册
-		LogIn_Request		//登录
+		LogIn_Request,		//登录
+		Detection_Save_Request,//发送样本数据
+		Detection_Read_Request//请求样本数据
 	};
 
 	//响应类型
 	enum ResponseType
 	{
 		Enroll_Response,	//注册
-		LogIn_Response		//登录
+		LogIn_Response,		//登录
+		Detection_Read_Response//返回样本数据
 	};
 
 	//注册响应类型
@@ -38,4 +41,3 @@ public:
 		Login_error			//未知错误
 	};
 };
-

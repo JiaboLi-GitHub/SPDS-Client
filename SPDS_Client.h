@@ -5,8 +5,6 @@
 
 #include "ui_SPDS_Client.h"
 
-
-
 class SPDS_Client : public QMainWindow
 {
     Q_OBJECT

@@ -4,9 +4,11 @@
 #include<qthread.h>
 
 
-class TcpSocket:
-	public QThread
+class TcpSocket
+	:QObject
 {
+	Q_OBJECT
+
 public:
 	TcpSocket();
 	~TcpSocket();

@@ -1,5 +1,7 @@
 #include "Detection.h"
 
+#include <QDateTime>
+#include <QMetaType>
 
 Detection::Detection(QWidget *parent)
     : QWidget(parent)
@@ -13,10 +15,23 @@ Detection::Detection(QWidget *parent)
     image.load(":/SPDS_Client/resources/icon/detection_background_error.png");
     ui.frame->setScaledContents(true);
     ui.frame->setPixmap(QPixmap::fromImage(image));
+
+    module = new Module(this);
+    moduleThread = new QThread(this);
+    module->moveToThread(moduleThread);
+
+    //connect(this, SIGNAL(forward(const QImage&)), module, SLOT(forward(const QImage&)), Qt::AutoConnection);
+    qRegisterMetaType<SPDData::Detection_Result>("SPDData::Detection_Result");
+    connect(this, &Detection::forward, module, &Module::forward, Qt::QueuedConnection);
+    connect(module, &Module::setStatus, this, &Detection::setStatus, Qt::QueuedConnection);
+
+    moduleThread->start();
 }
 
 Detection::~Detection()
 {
+    moduleThread->terminate();
+
     delete camera;
     delete videoSurface;
 }
@@ -78,11 +93,42 @@ void Detection::_presentframe(QVideoFrame& frame)
     
     //img.save("a.jpg");
 
-
     QMatrix matrix;
     matrix.rotate(180);
     img = img.transformed(matrix);
+
+    qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
+
+    emit forward(img);
+
     ui.cameraStart->setPixmap(QPixmap::fromImage(img));
     ui.cameraStart->setScaledContents(true);
 }
 
+void Detection::setStatus(SPDData::Detection_Result status)
+{
+    if (status)
+    {
+        switch (status)
+        {
+        case SPDData::Detection_Result::Normal:
+            ui.status->setText(u8"×ø×ËÕý³£");
+            break;
+        case SPDData::Detection_Result::Head:
+            ui.status->setText(u8"ÍÐÍ·");
+            break;
+        case SPDData::Detection_Result::Front:
+            ui.status->setText(u8"×ø×ËÇ°Çã");
+            break;
+        case SPDData::Detection_Result::Back:
+            ui.status->setText(u8"×ø×ËºóÇã");
+            break;
+        case SPDData::Detection_Result::Left:
+            ui.status->setText(u8"×ø×Ë×óÇã");
+            break;
+        case SPDData::Detection_Result::Right:
+            ui.status->setText(u8"×ø×ËÓÒÇã");
+            break;
+        }
+    }
+}

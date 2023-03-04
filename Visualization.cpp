@@ -5,12 +5,12 @@
 #include <QLineSeries>
 #include <QValueAxis>
 #include <QCategoryAxis>
+#include <qfontdatabase.h>
 
 #include "Visualization.h"
-#include "DailyDataDelegate.h"
 
 Visualization::Visualization(QWidget* parent)
-    : QWidget(parent)
+	:QWidget(parent)
 {
     ui.setupUi(this);
 
@@ -20,20 +20,27 @@ Visualization::Visualization(QWidget* parent)
     listWidget = ui.listWidget;
     availableItem = 0;
 
-    QChart* mainChart, * secondChart, * thirdChart;
-    mainChart = initQLineChart();
-    mainChart->setTitleFont(QFont(QString::fromUtf8("\351\230\277\351\207\214\345\267\264\345\267\264\346\231\256\346\203\240\344\275\223 2.0 55 Regular"), 16));
-    secondChart = initQLineChart();
-    secondChart->setTitleFont(QFont(QString::fromUtf8("\351\230\277\351\207\214\345\267\264\345\267\264\346\231\256\346\203\240\344\275\223 2.0 55 Regular"), 12));
-    thirdChart = initQLineChart();
-    thirdChart->setTitleFont(QFont(QString::fromUtf8("\351\230\277\351\207\214\345\267\264\345\267\264\346\231\256\346\203\240\344\275\223 2.0 55 Regular"), 12));
+	QChart* mainChart, * secondChart, * thirdChart;
+	mainChart = initQLineChart();
+	secondChart = initQLineChart();
+	thirdChart = initQLineChart();
+	
+	mainChart->resize(mainWidget->size());
+	mainWidget->setChart(mainChart);
+	secondChart->resize(secondWidget->size());
+	secondWidget->setChart(secondChart);
+	thirdChart->resize(thirdWidget->size());
+	thirdWidget->setChart(thirdChart);
 
-    mainWidget->setChart(mainChart);
-    secondChart->resize(secondWidget->size());
-    secondWidget->setChart(secondChart);
-    thirdChart->resize(thirdWidget->size());
-    thirdWidget->setChart(thirdChart);
-
+	int font_Id = QFontDatabase::addApplicationFont(":/SPDS_Client/resources/font/Alibaba_PuHuiTi_2.0_55_Regular_55_Regular.ttf");
+	QStringList font_list = QFontDatabase::applicationFontFamilies(font_Id);
+	if (!font_list.isEmpty())
+	{
+		QFont f16(font_list[0],16), f12(font_list[0],12);
+		mainChart->setTitleFont(f16);
+		secondChart->setTitleFont(f12);
+		thirdChart->setTitleFont(f12);
+	}
 
     initListWidget(
         listWidget, 5,
@@ -51,6 +58,7 @@ Visualization::Visualization(QWidget* parent)
 
 Visualization::~Visualization()
 {
+
 }
 
 QChart* Visualization::initQLineChart()
@@ -95,59 +103,58 @@ QChartView* Visualization::initQPieChartView(QString date,
     qint32 pos0, qint32 pos1, qint32 pos2,
     qint32 pos3, qint32 pos4, qint32 pos5)
 {
-    QPieSlice* slice0, *slice1, *slice2, *slice3, *slice4, *slice5;
+	QPieSlice* slice0, * slice1, * slice2, * slice3, * slice4, * slice5;
+	QPieSeries* series = new QPieSeries(this);
 
-    if (pos1+pos2+pos3+pos4+pos5==0)
-    {
-        slice0 = new QPieSlice(u8"正常", pos0);
-        slice0->setLabel(QString("%1: %2").arg(slice0->label()).arg(slice0->value()));
-    }
-    else
-    {
-        if(pos1)
-        {
-            slice1 = new QPieSlice(u8"托头", pos1);
-            slice1->setLabel(QString("%1: %2").arg(slice1->label()).arg(slice1->value()));
-        }
+	if (pos1 + pos2 + pos3 + pos4 + pos5 == 0)
+	{
+		slice0 = new QPieSlice(u8"正常", pos0);
+		slice0->setLabel(QString("%1:%2").arg(slice0->label()).arg(slice0->value()));
+		series->append(slice0);
+	}
+	else
+	{
+		if (pos1)
+		{
+			slice1 = new QPieSlice(u8"托头", pos1);
+			slice1->setLabel(QString("%1:%2").arg(slice1->label()).arg(slice1->value()));
+			series->append(slice1);
+		}
 
-        if(pos2)
-        {
-            slice2 = new QPieSlice(u8"前倾", pos2);
-            slice2->setLabel(QString("%1: %2").arg(slice2->label()).arg(slice2->value()));
-        }
+		if (pos2)
+		{
+			slice2 = new QPieSlice(u8"前倾", pos2);
+			slice2->setLabel(QString("%1:%2").arg(slice2->label()).arg(slice2->value()));
+			series->append(slice2);
+		}
 
-        if(pos3)
-        {
-            slice3 = new QPieSlice(u8"后倾", pos3);
-            slice3->setLabel(QString("%1: %2").arg(slice3->label()).arg(slice3->value()));
-        }
+		if (pos3)
+		{
+			slice3 = new QPieSlice(u8"后倾", pos3);
+			slice3->setLabel(QString("%1:%2").arg(slice3->label()).arg(slice3->value()));
+			series->append(slice3);
+		}
 
-        if(pos4)
-        {
-            slice4 = new QPieSlice(u8"左倾", pos4);
-            slice4->setLabel(QString("%1: %2").arg(slice4->label()).arg(slice4->value()));
-        }
+		if (pos4)
+		{
+			slice4 = new QPieSlice(u8"左倾", pos4);
+			slice4->setLabel(QString("%1:%2").arg(slice4->label()).arg(slice4->value()));
+			series->append(slice4);
+		}
 
-        if(pos5)
-        {
-            slice5 = new QPieSlice(u8"右倾", pos5);
-            slice5->setLabel(QString("%1: %2").arg(slice5->label()).arg(slice5->value()));
-        }
-    }
-    
+		if (pos5)
+		{
+			slice5 = new QPieSlice(u8"右倾", pos5);
+			slice5->setLabel(QString("%1:%2").arg(slice5->label()).arg(slice5->value()));
+			series->append(slice5);
+		}
+	}
 
-    //创建饼图
-    QPieSeries* series = new QPieSeries(this);
-    series->append(slice0);
-    series->append(slice1);
-    series->append(slice2);
-    series->append(slice3);
-    series->append(slice4);
-    series->append(slice5);
-    series->setPieSize(0.7);
-    series->setLabelsVisible(true);
-    series->setUseOpenGL(true);
-    //series->setHoleSize(0.5);
+	//创建饼图
+	series->setPieSize(0.7);
+	series->setLabelsVisible(true);
+	series->setUseOpenGL(true);
+	//series->setHoleSize(0.5);
 
     QChart* chart = new QChart();
     chart->addSeries(series);

@@ -2,23 +2,28 @@
 #include<qdatetime.h>
 #include<qimage.h>
 
-class SPDData
+class SPDData:QObject
 {
+	Q_OBJECT
+
 public:
 	SPDData();
 	~SPDData();
 
 public:
-	static enum Result
+    //检测结果
+	enum Detection_Result
 	{
-		Correct,			//0正常
-		LeftLeaning,		//1左倾
-		RightLeaning		//2右倾
+		Normal, //正常
+		Head,   //托头
+		Front,  //前倾
+		Back,   //后倾
+		Left,   //左倾
+		Right   //右倾
 	};
 
 public:
-	QDateTime dateTime;		//时间日期
-	QImage image;			//监测图片
-	Result result;			//监测结果
+	QDate date;		//日期
+	Detection_Result result;//监测结果
 };
 

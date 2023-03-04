@@ -84,7 +84,6 @@ TcpData::ResponseType MessageJson::getResponseType(QByteArray& byteArray)
 	return type;
 }
 
-
 /*************************************************
 Description: 解析请求数据
 	  Input: 来自客户端的请求字节数组

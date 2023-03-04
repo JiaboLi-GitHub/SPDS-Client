@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Detection</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="status">
    <property name="geometry">
     <rect>
      <x>410</x>
@@ -127,7 +127,7 @@
     <string/>
    </property>
   </widget>
-  <zorder>label</zorder>
+  <zorder>status</zorder>
   <zorder>frame</zorder>
   <zorder>cameraStop</zorder>
   <zorder>cameraStart</zorder>

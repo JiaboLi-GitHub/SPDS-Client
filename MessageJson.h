@@ -1,7 +1,7 @@
 #pragma once
-#include<qbytearray.h>
-#include<qjsonobject.h>
-#include"TcpData.h"
+#include <qbytearray.h>
+#include <qjsonobject.h>
+#include "TcpData.h"
 
 class MessageJson
 {

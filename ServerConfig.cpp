@@ -54,6 +54,12 @@ bool ServerConfig::setServerIP(QString ipAddr)
         configManager = new QSettings("./server.ini", QSettings::IniFormat);
     }
 
+    QRegExp ipAddrRegExp(R"(^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$)");
+    if (!ipAddrRegExp.exactMatch(ipAddr))
+    {
+        return false;
+    }
+
     TcpSocket::connectToHost(ipAddr, 8888);
     if (!TcpSocket::isConnected())
     {
