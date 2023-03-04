@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{20c2cc40-e4bc-43b8-bcbf-8bb423d1db30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Widget H">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Widget Cpp">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Utility Class">
+      <UniqueIdentifier>{7d12e8d6-488a-4d81-b6a2-05494cf4050e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{192571e4-3402-48fa-82ad-1c90276fed7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{76f38ea0-e78f-45e7-922f-101b67b2d745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tcp Socket">
+      <UniqueIdentifier>{bb81439c-3407-4d3e-b475-dc01474489f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{e8154b83-7a7d-49b6-a862-09311e11de16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Widget Ui">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{2ba2660e-b891-4008-8b7e-397842d73f65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="SPDS_Client.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtUic Include="SPDS_Client.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDS_Client.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilityClass.cpp">
+      <Filter>Utility Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Detection.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoSurface.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Enroll.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginShare.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpData.cpp">
+      <Filter>Tcp Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpSocket.cpp">
+      <Filter>Tcp Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageJson.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerConfig.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Visualization.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SPDDataPerDay.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLoader.cpp">
+      <Filter>Module</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp">
+      <Filter>Module</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="SPDS_Client.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="Detection.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="VideoSurface.h">
+      <Filter>Camera</Filter>
+    </QtMoc>
+    <QtMoc Include="Enroll.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="LoginShare.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="Login.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="ServerConfig.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="Visualization.h">
+      <Filter>Widget H</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDDataPerDay.h">
+      <Filter>Data</Filter>
+    </QtMoc>
+    <QtMoc Include="ModuleLoader.h">
+      <Filter>Module</Filter>
+    </QtMoc>
+    <QtMoc Include="Module.h">
+      <Filter>Module</Filter>
+    </QtMoc>
+    <QtMoc Include="SPDData.h">
+      <Filter>Data</Filter>
+    </QtMoc>
+    <QtMoc Include="TcpSocket.h">
+      <Filter>Tcp Socket</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UtilityClass.h">
+      <Filter>Utility Class</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpData.h">
+      <Filter>Tcp Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageJson.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Widget H</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Detection.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+    <QtUic Include="Enroll.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+    <QtUic Include="Login.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+    <QtUic Include="LoginShare.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+    <QtUic Include="ServerConfig.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+    <QtUic Include="Visualization.ui">
+      <Filter>Widget Ui</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SPDS_Client.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\logo\logo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="server.ini" />
+  </ItemGroup>
+</Project>
