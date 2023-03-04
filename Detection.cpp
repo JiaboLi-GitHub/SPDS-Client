@@ -24,6 +24,8 @@ Detection::Detection(QWidget *parent)
     qRegisterMetaType<SPDData::Detection_Result>("SPDData::Detection_Result");
     connect(this, &Detection::forward, module, &Module::forward, Qt::QueuedConnection);
     connect(module, &Module::setStatus, this, &Detection::setStatus, Qt::QueuedConnection);
+
+    moduleThread->start();
 }
 
 Detection::~Detection()
@@ -50,35 +52,6 @@ void Detection::on_start_clicked()
     }
 }
 
-void test(const char path[])
-{
-    cv::Mat image = cv::imread(path);
-    if (image.empty())
-        fprintf(stderr, "Can not load image\n");
-
-    // 转换通道,
-    cv::cvtColor(image, image, CV_BGR2RGB);
-    cv::Mat img_float;
-    image.convertTo(img_float, CV_32F, 1.0 / 255); //归一化
-
-    // resize, 测试一个点数据
-    cv::resize(img_float, img_float, cv::Size(224, 224));
-    //std::cout << img_float.at<cv::Vec3f>(256, 128)[1] << std::endl;
-
-    // 转换成tensor
-    auto img_tensor = torch::from_blob(img_float.data, { 1, 3, 224, 224 }, torch::kFloat32);
-
-
-    // 构造input
-    //auto img_var = torch::autograd::make_variable(img_tensor, false); //tensor->variable会报错
-    std::vector<torch::jit::IValue> inputs;
-    inputs.emplace_back(img_tensor); //向容器中加入新的元素, 右值引用
-
-    //前向
-    at::Tensor output_image = ModuleLoader::module.forward(inputs).toTensor();  //得出结果
-    std::cout << output_image<<std::endl;
-}
-
 /*-------------------------------摄像头------------------------------------*/
 /*************************************************
 Description: 打开摄像头
@@ -93,17 +66,6 @@ void Detection::startCamera()
     camera->setViewfinder(videoSurface);
     connect(videoSurface, &VideoSurface::presentframe_, this, &Detection::_presentframe);
     camera->start();
-
-
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\a1.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\a2.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\a3.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\b1.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\b2.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\b3.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\c1.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\c2.png");
-    test("C:\\Users\\Gecko\\source\\repos\\JiaboLi-GitHub\\SPDS-Client\\c3.png");
 }
 
 /*************************************************
@@ -111,7 +73,6 @@ Description: 关闭摄像头
 *************************************************/
 void Detection::stopCamera()
 {
-    moduleThread->terminate();
     ui.cameraStart->clear();
     camera->stop();
     delete videoSurface;

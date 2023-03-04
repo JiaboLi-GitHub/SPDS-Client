@@ -35,7 +35,7 @@ private:
     void showDetection();
     void showVisualization();
     void showFamilial();
-  
+
 private:
     enum Location
     {
