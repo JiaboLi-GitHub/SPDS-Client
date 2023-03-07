@@ -37,6 +37,8 @@ SPDS_Client::SPDS_Client(QWidget *parent)
 
     setUserName();
 
+    autoLogin();
+
     //Á¬½ÓÍøÂç
     //TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888);
 }
@@ -275,6 +277,9 @@ void SPDS_Client::autoLogin()
                     emit setUserName(userName);
                     this->token = token;
                 }
+                break;
+            default: 
+
             }
         }
         else
