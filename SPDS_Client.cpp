@@ -241,7 +241,13 @@ QVariant SPDS_Client::getUserToken()
     createTable(db);
 
     QSqlQuery query(db);
-    query.exec("SELECT * FROM tokens");
+    bool exist = query.exec("SELECT * FROM tokens");
+
+    if (!exist || !query.next())
+    {
+        db.close();
+        return QVariant();
+    }
 
     QString userName = query.value(0).toString();
     QString token = query.value(1).toString();
@@ -257,6 +263,11 @@ QVariant SPDS_Client::getUserToken()
 void SPDS_Client::autoLogin()
 {
     QVariant userInfo = getUserToken();
+    if (userInfo.isNull())
+    {
+        return;
+    }
+
     QPair<QString, QString> userInfoPair = userInfo.value<QPair<QString, QString>>();
     QString token = userInfoPair.first;
     QString userName = userInfoPair.second;
