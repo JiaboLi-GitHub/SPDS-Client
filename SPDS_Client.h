@@ -43,6 +43,7 @@ private:
     QSqlDatabase openDatabase();
     QVariant getUserToken();
     void createTable(QSqlDatabase db);
+    void autoLogin();
 
 private:
     enum Location
@@ -58,5 +59,6 @@ private:
     //´°Ìå¿ÉÒÆ¶¯
     QPoint pLast;
     bool m_bPressed; 
+    QString userName;
     QString token;
 };

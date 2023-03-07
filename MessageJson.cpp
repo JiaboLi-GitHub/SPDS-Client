@@ -43,8 +43,25 @@ QByteArray MessageJson::loginDataToQByteArray(QString mailAddress, QString passw
     data_json.insert("password", password);
     verificationData_json.insert("data", data_json);
     QJsonDocument document = QJsonDocument::QJsonDocument(verificationData_json);
-    QByteArray requestCode_byteArray = document.toBinaryData();
-    return requestCode_byteArray;
+    QByteArray loginData_byteArray = document.toBinaryData();
+    return loginData_byteArray;
+}
+
+/*************************************************
+Description: 生成自动登录信息字节流
+      Input: token=本地保存的用户token
+     Return: 自动登录信息的字节流
+*************************************************/
+QByteArray MessageJson::autoLoginDataToQByteArray(QString token)
+{
+    QJsonObject verificationData_json;
+    verificationData_json.insert("RequestType", TcpData::RequestType::LogIn_Request);
+    QJsonObject data_json;
+    data_json.insert("token", token);
+    verificationData_json.insert("data", data_json);
+    QJsonDocument document = QJsonDocument::QJsonDocument(verificationData_json);
+    QByteArray autoLoginData_byteArray = document.toBinaryData();
+    return autoLoginData_byteArray;
 }
 
 /*************************************************
@@ -66,8 +83,8 @@ QByteArray MessageJson::enrollToQByteArray(QString mailAddress, QString password
     data_json.insert("code", code);
     verificationData_json.insert("data", data_json);
     QJsonDocument document = QJsonDocument::QJsonDocument(verificationData_json);
-    QByteArray requestCode_byteArray = document.toBinaryData();
-    return requestCode_byteArray;
+    QByteArray enroll_byteArray = document.toBinaryData();
+    return enroll_byteArray;
 }
 
 /*************************************************

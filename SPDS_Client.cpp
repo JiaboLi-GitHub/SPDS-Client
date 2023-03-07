@@ -9,7 +9,10 @@
 #include <qpainter.h>
 #include <qpair.h>
 #include <qvariant.h>
+#include <qhostinfo.h>
+#include <qmessagebox.h>
 
+#include "MessageJson.h"
 #include "Detection.h"
 #include "UtilityClass.h"
 #include "Login.h"
@@ -212,12 +215,13 @@ void SPDS_Client::on_serverConfigButton_clicked()
 void SPDS_Client::setUserName(QString userName)
 {
     ui.userName->setText(userName);
+    this->userName = userName;
 }
 
 void SPDS_Client::setUserToken(QString userName, QString token)
 {
     QSqlDatabase db = openDatabase();
-    createTable();
+    createTable(db);
 
     QSqlQuery query(db);
     query.exec("DROP * FROM tokens");
@@ -246,6 +250,50 @@ QVariant SPDS_Client::getUserToken()
     data.setValue(qMakePair(token, userName));
 
     return data;
+}
+
+void SPDS_Client::autoLogin()
+{
+    QVariant userInfo = getUserToken();
+    QPair<QString, QString> userInfoPair = userInfo.value<QPair<QString, QString>>();
+    QString token = userInfoPair.first;
+    QString userName = userInfoPair.second;
+
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    {
+        QByteArray byteArray = MessageJson::autoLoginDataToQByteArray(token);
+        TcpSocket::write(byteArray);
+
+        if (TcpSocket::isReceived())
+        {
+            QByteArray receivedByteArray = TcpSocket::read();
+            QMap<QString, QString> receivedData = MessageJson::getResponseData(receivedByteArray);
+            switch (receivedData["Auto_LogIn_Response"].toInt())
+            {
+            case TcpData::Auto_Login_Response::Auto_Login_Correct:
+                {
+                    emit setUserName(userName);
+                    this->token = token;
+                }
+            }
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"服务器无回应！", QMessageBox::Ok);
+        }
+    }
+    else
+    {
+        QHostInfo info = QHostInfo::fromName("baidu.com");
+        if (info.error() != QHostInfo::NoError)
+        {
+            QMessageBox::warning(NULL, toUTF8("网络错误"), toUTF8("请检查网络连接！"), QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器！", QMessageBox::Ok);
+        }
+    }
 }
 
 
@@ -341,4 +389,6 @@ void SPDS_Client::createTable(QSqlDatabase db)
 
     return;
 }
+
+
 

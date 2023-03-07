@@ -43,4 +43,11 @@ public:
 		Account_Error,		//ÕËºÅ´íÎó
 		Login_error			//Î´Öª´íÎó
 	};
+
+	enum Auto_Login_Response
+	{
+		Auto_Login_Correct,
+		Auto_Login_Error,
+		Auto_Login_Error
+	};
 };

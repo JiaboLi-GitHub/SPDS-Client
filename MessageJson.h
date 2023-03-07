@@ -8,6 +8,7 @@ class MessageJson
 public:
 	static QByteArray verificationDataToQByteArray(QString id);
 	static QByteArray loginDataToQByteArray(QString mailAddress, QString password);
+	static QByteArray autoLoginDataToQByteArray(QString token);
 	static QByteArray enrollToQByteArray(QString mailAddress, QString password, QString userName, QString code);
 	
 public:
