@@ -19,9 +19,6 @@
     <Filter Include="Utility Class">
       <UniqueIdentifier>{7d12e8d6-488a-4d81-b6a2-05494cf4050e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
-      <UniqueIdentifier>{192571e4-3402-48fa-82ad-1c90276fed7a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{76f38ea0-e78f-45e7-922f-101b67b2d745}</UniqueIdentifier>
     </Filter>
@@ -57,9 +54,6 @@
     <ClCompile Include="Detection.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="SPDData.cpp">
-      <Filter>Data</Filter>
-    </ClCompile>
     <ClCompile Include="VideoSurface.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -86,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="Visualization.cpp">
       <Filter>Widget Cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="SPDDataPerDay.cpp">
-      <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,12 +123,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SPDData.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="SPDDataPerDay.h">
-      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
