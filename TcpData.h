@@ -46,8 +46,7 @@ public:
 
 	enum Auto_Login_Response
 	{
-		Auto_Login_Correct,
-		Auto_Login_Error,
-		Auto_Login_Error
+		Auto_Login_Correct,    //自动登录成功
+		Auto_Login_Error       //自动登录失败
 	};
 };

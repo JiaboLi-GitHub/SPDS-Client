@@ -279,6 +279,7 @@ void SPDS_Client::autoLogin()
                 }
                 break;
             default: 
+                break;
 
             }
         }

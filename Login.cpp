@@ -62,7 +62,7 @@ bool Login::on_login_clicked()
                     emit setUserName(userName);
 
                     QString token = receivedData["token"];
-                    emit setUserToken(token);
+                    emit setUserToken(token, userName);
                 }
                 return true;
 
