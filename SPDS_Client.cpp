@@ -257,6 +257,8 @@ QVariant SPDS_Client::getUserToken()
     QVariant data;
     data.setValue(qMakePair(token, userName));
 
+    setUserName(userName)£»
+
     return data;
 }
 

@@ -2,8 +2,9 @@
 #include <qobject.h>
 #include <qdatetime.h>
 
-class TcpData
+class TcpData : QObject
 {
+	Q_OBJECT
 public:
 	TcpData();
 	~TcpData();
@@ -61,7 +62,7 @@ class SPDDataPerDay : public QObject
 public:
 	SPDDataPerDay(QDate date, double accuracy, qint32 totalCount, qint32 normal,
 		qint32 head, qint32 front, qint32 back, qint32 left, qint32 right) :
-		date(date), accuracy(accuracy), normal(normal), head(head),
+		date(date), accuracy(accuracy), totalCount(totalCount), normal(normal), head(head),
 		front(front), back(back), left(left), right(right) {}
 	~SPDDataPerDay() = default;
 
