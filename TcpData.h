@@ -1,6 +1,10 @@
 #pragma once
-class TcpData
+#include <qobject.h>
+#include <qdatetime.h>
+
+class TcpData : QObject
 {
+	Q_OBJECT
 public:
 	TcpData();
 	~TcpData();
@@ -49,4 +53,47 @@ public:
 		Auto_Login_Correct,    //自动登录成功
 		Auto_Login_Error       //自动登录失败
 	};
+};
+
+class SPDDataPerDay : public QObject
+{
+	Q_OBJECT
+
+public:
+	SPDDataPerDay(QDate date, double accuracy, qint32 totalCount, qint32 normal,
+		qint32 head, qint32 front, qint32 back, qint32 left, qint32 right) :
+		date(date), accuracy(accuracy), totalCount(totalCount), normal(normal), head(head),
+		front(front), back(back), left(left), right(right) {}
+	~SPDDataPerDay() = default;
+
+private:
+	QDate date;
+	double accuracy;
+	qint32 totalCount;
+	qint32 normal, head, front, back, left, right;
+};
+
+class SPDData :QObject
+{
+	Q_OBJECT
+public:
+	//检测结果
+	enum Detection_Result
+	{
+		Normal, //正常
+		Head,   //托头
+		Front,  //前倾
+		Back,   //后倾
+		Left,   //左倾
+		Right   //右倾
+	};
+
+public:
+	SPDData(QDate date, Detection_Result result) :
+		date(date), result(result) {}
+	~SPDData() = default;
+
+public:
+	QDate date;		//日期
+	Detection_Result result;//监测结果
 };
