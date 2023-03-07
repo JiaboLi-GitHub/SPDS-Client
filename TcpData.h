@@ -59,14 +59,15 @@ class SPDDataPerDay : public QObject
 	Q_OBJECT
 
 public:
-	SPDDataPerDay(QDate date, qint32 totalCount, qint32 normal, qint32 head,
-		qint32 front, qint32 back, qint32 left, qint32 right) :
-		date(date), totalCount(totalCount), normal(normal), head(head),
+	SPDDataPerDay(QDate date, double accuracy, qint32 totalCount, qint32 normal,
+		qint32 head, qint32 front, qint32 back, qint32 left, qint32 right) :
+		date(date), accuracy(accuracy), normal(normal), head(head),
 		front(front), back(back), left(left), right(right) {}
 	~SPDDataPerDay() = default;
 
 private:
 	QDate date;
+	double accuracy;
 	qint32 totalCount;
 	qint32 normal, head, front, back, left, right;
 };
