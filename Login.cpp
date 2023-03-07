@@ -57,6 +57,13 @@ bool Login::on_login_clicked()
             {
             case TcpData::Login_Response::Login_Correct:
                 QMessageBox::warning(NULL, u8"登录成功", u8"登录成功！", QMessageBox::Ok);
+                {
+                    QString userName = receivedData["userName"];
+                    emit setUserName(userName);
+
+                    QString token = receivedData["token"];
+                    emit setUserToken(token);
+                }
                 return true;
 
             case TcpData::Login_Response::Account_Error:

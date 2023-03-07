@@ -16,21 +16,21 @@ Detection::Detection(QWidget *parent)
     ui.frame->setScaledContents(true);
     ui.frame->setPixmap(QPixmap::fromImage(image));
 
-    module = new Module(this);
-    moduleThread = new QThread(this);
-    module->moveToThread(moduleThread);
+    //module = new Module(this);
+    //moduleThread = new QThread(this);
+    //module->moveToThread(moduleThread);
 
     //connect(this, SIGNAL(forward(const QImage&)), module, SLOT(forward(const QImage&)), Qt::AutoConnection);
-    qRegisterMetaType<SPDData::Detection_Result>("SPDData::Detection_Result");
-    connect(this, &Detection::forward, module, &Module::forward, Qt::QueuedConnection);
-    connect(module, &Module::setStatus, this, &Detection::setStatus, Qt::QueuedConnection);
+    //qRegisterMetaType<SPDData::Detection_Result>("SPDData::Detection_Result");
+    //connect(this, &Detection::forward, module, &Module::forward, Qt::QueuedConnection);
+    //connect(module, &Module::setStatus, this, &Detection::setStatus, Qt::QueuedConnection);
 
-    moduleThread->start();
+    //moduleThread->start();
 }
 
 Detection::~Detection()
 {
-    moduleThread->terminate();
+    //moduleThread->terminate();
 
     delete camera;
     delete videoSurface;
@@ -81,6 +81,11 @@ void Detection::stopCamera()
     videoSurface = NULL;
 }
 
+bool Detection::isFreeze()
+{
+    return openSt;
+}
+
 /*************************************************
 Description: ½«ÊÓÆµÖ¡Ðý×ªºóÏÔÊ¾ÔÚ½çÃæÉÏ
       Input: frame=ÊÓÆµÖ¡
@@ -97,9 +102,7 @@ void Detection::_presentframe(QVideoFrame& frame)
     matrix.rotate(180);
     img = img.transformed(matrix);
 
-    qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
-
-    emit forward(img);
+    //emit forward(img);
 
     ui.cameraStart->setPixmap(QPixmap::fromImage(img));
     ui.cameraStart->setScaledContents(true);
@@ -107,28 +110,25 @@ void Detection::_presentframe(QVideoFrame& frame)
 
 void Detection::setStatus(SPDData::Detection_Result status)
 {
-    if (status)
+    switch (status)
     {
-        switch (status)
-        {
-        case SPDData::Detection_Result::Normal:
-            ui.status->setText(u8"×ø×ËÕý³£");
-            break;
-        case SPDData::Detection_Result::Head:
-            ui.status->setText(u8"ÍÐÍ·");
-            break;
-        case SPDData::Detection_Result::Front:
-            ui.status->setText(u8"×ø×ËÇ°Çã");
-            break;
-        case SPDData::Detection_Result::Back:
-            ui.status->setText(u8"×ø×ËºóÇã");
-            break;
-        case SPDData::Detection_Result::Left:
-            ui.status->setText(u8"×ø×Ë×óÇã");
-            break;
-        case SPDData::Detection_Result::Right:
-            ui.status->setText(u8"×ø×ËÓÒÇã");
-            break;
-        }
+    case SPDData::Detection_Result::Normal:
+        ui.status->setText(u8"×ø×ËÕý³£");
+        break;
+    case SPDData::Detection_Result::Head:
+        ui.status->setText(u8"ÍÐÍ·");
+        break;
+    case SPDData::Detection_Result::Front:
+        ui.status->setText(u8"×ø×ËÇ°Çã");
+        break;
+    case SPDData::Detection_Result::Back:
+        ui.status->setText(u8"×ø×ËºóÇã");
+        break;
+    case SPDData::Detection_Result::Left:
+        ui.status->setText(u8"×ø×Ë×óÇã");
+        break;
+    case SPDData::Detection_Result::Right:
+        ui.status->setText(u8"×ø×ËÓÒÇã");
+        break;
     }
 }

@@ -10,7 +10,7 @@
 #include "ui_Detection.h"
 #include "VideoSurface.h"
 #include "SPDData.h"
-#include "Module.h"
+//#include "Module.h"
 
 class Detection : public QWidget
 {
@@ -21,6 +21,7 @@ public:
     ~Detection();
     void startCamera();
     void stopCamera();
+    bool isFreeze();
 
 public slots:
     void on_start_clicked();
@@ -38,7 +39,7 @@ private:
     //…„œÒÕ∑
     QCamera* camera = NULL;
     VideoSurface* videoSurface = NULL;
-    QImage img; 
-    Module* module = NULL;
-    QThread* moduleThread = NULL;
+    QImage img;
+    //Module* module = NULL;
+    //QThread* moduleThread = NULL;
 };

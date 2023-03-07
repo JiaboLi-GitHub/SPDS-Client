@@ -8,13 +8,15 @@ class Login : public QWidget
     Q_OBJECT
 
 public:
-    Login(QWidget *parent = nullptr);
+    Login(QWidget* parent = nullptr);
     ~Login();
     void setStyle();
     bool verifyInformation();
 
 signals:
     void goEnroll();
+    void setUserName(QString userName);
+    void setUserToken(QString userName, QString token);
 
 public slots:
     bool on_login_clicked();

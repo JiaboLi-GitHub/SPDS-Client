@@ -1,21 +1,23 @@
 #include "SPDS_Client.h"
 
-#include<qtreewidget.h>
-#include<qfile.h>
-#include<qlabel.h>
-#include<qimage.h>
-#include<qfontdatabase.h>
-#include<qdebug.h>
-#include<qpainter.h>
+#include <qtreewidget.h>
+#include <qfile.h>
+#include <qlabel.h>
+#include <qimage.h>
+#include <qfontdatabase.h>
+#include <qdebug.h>
+#include <qpainter.h>
+#include <qpair.h>
+#include <qvariant.h>
 
-#include"Detection.h"
-#include"UtilityClass.h"
-#include"Login.h"
-#include"Enroll.h"
-#include"LoginShare.h"
-#include"TcpSocket.h"
-#include"ServerConfig.h"
-#include"Visualization.h"
+#include "Detection.h"
+#include "UtilityClass.h"
+#include "Login.h"
+#include "Enroll.h"
+#include "LoginShare.h"
+#include "TcpSocket.h"
+#include "ServerConfig.h"
+#include "Visualization.h"
 using namespace utility;
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
@@ -25,9 +27,12 @@ SPDS_Client::SPDS_Client(QWidget *parent)
 {
     ui.setupUi(this);
     setStyle();     //设置样式
+    openDatabase();
 
     location = Wait_For_Init;
     showDetection();
+
+    setUserName();
 
     //连接网络
     //TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888);
@@ -70,7 +75,6 @@ void SPDS_Client::setStyle()
 
     setLeftMenuTreeWidgetStyle();
     setUpMenuWidgetStyle();
-   
 }
 
 //设置左边菜单栏样式
@@ -95,7 +99,6 @@ void SPDS_Client::setLeftMenuTreeWidgetStyle()
     //history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOn.png"), QIcon::Selected);
     //history_icon.addPixmap(QPixmap(":/SPDS_Client/resources/icon/historyOff.png"), QIcon::Normal);
     //history_treeWidgetItem->setIcon(0, history_icon);
-    
 
     auto son_treeWidgetItem = new QTreeWidgetItem(QStringList(toUTF8(" 亲子坐姿")));
     QIcon son_icon;
@@ -195,7 +198,7 @@ void SPDS_Client::on_login_clicked()
     widget.setStyleSheet("background-color:rgba(0, 0, 0,50%);");
     widget.show();
 
-    LoginShare loginShare;
+    LoginShare loginShare(this);
     loginShare.exec();
 }
 
@@ -205,9 +208,53 @@ void SPDS_Client::on_serverConfigButton_clicked()
     serverconfig.exec();
 }
 
+/*---------------------------读写用户信息---------------------------------*/
+void SPDS_Client::setUserName(QString userName)
+{
+    ui.userName->setText(userName);
+}
+
+void SPDS_Client::setUserToken(QString userName, QString token)
+{
+    QSqlDatabase db = openDatabase();
+    createTable();
+
+    QSqlQuery query(db);
+    query.exec("DROP * FROM tokens");
+    query.prepare("INSERT INTO tokens (username, token) VALUES (:username, :token)");
+    query.bindValue(":username", userName);
+    query.bindValue(":token", token);
+    query.exec();
+
+    db.close();
+}
+
+QVariant SPDS_Client::getUserToken()
+{
+    QSqlDatabase db = openDatabase();
+    createTable(db);
+
+    QSqlQuery query(db);
+    query.exec("SELECT * FROM tokens");
+
+    QString userName = query.value(0).toString();
+    QString token = query.value(1).toString();
+
+    db.close();
+
+    QVariant data;
+    data.setValue(qMakePair(token, userName));
+
+    return data;
+}
+
+
 /*---------------------------页面切换---------------------------------*/
 void SPDS_Client::on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, qint32 itemID)
 {
+    if (location == Location::Loc_Detection && ((Detection*)ui.mainWidget)->isFreeze())
+        return;
+
     qint32 selecter = indexItem->data(0, Qt::UserRole).toInt();
     switch (selecter)
     {
@@ -257,3 +304,41 @@ void SPDS_Client::showFamilial()
     }
     location = Loc_Familial;
 }
+
+/*---------------------------数据库---------------------------------*/
+QSqlDatabase SPDS_Client::openDatabase()
+{
+    QSqlDatabase database;
+    if (QSqlDatabase::contains("qt_sql_default_connection"))
+    {
+        database = QSqlDatabase::database("qt_sql_default_connection");
+    }
+    else
+    {
+        database = QSqlDatabase::addDatabase("QSQLITE");
+        database.setDatabaseName("sqlite.db");
+        database.setUserName("master");
+        database.setPassword("SPDS_Client_SQL");
+    }
+
+    if (!database.isOpen())
+    {
+        database.open();
+    }
+
+    return database;
+}
+
+void SPDS_Client::createTable(QSqlDatabase db)
+{
+    QSqlQuery query(db);
+    bool exist = query.exec("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'tokens'");
+    
+    if (!exist || !query.next()) 
+    {
+        query.exec("CREATE TABLE tokens (username TEXT, token TEXT)");
+    }
+
+    return;
+}
+

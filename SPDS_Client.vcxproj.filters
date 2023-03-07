@@ -35,9 +35,6 @@
       <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
       <Extensions>ui</Extensions>
     </Filter>
-    <Filter Include="Module">
-      <UniqueIdentifier>{2ba2660e-b891-4008-8b7e-397842d73f65}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="SPDS_Client.qrc">
@@ -93,12 +90,6 @@
     <ClCompile Include="SPDDataPerDay.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLoader.cpp">
-      <Filter>Module</Filter>
-    </ClCompile>
-    <ClCompile Include="Module.cpp">
-      <Filter>Module</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SPDS_Client.h">
@@ -128,12 +119,6 @@
     <QtMoc Include="SPDDataPerDay.h">
       <Filter>Data</Filter>
     </QtMoc>
-    <QtMoc Include="ModuleLoader.h">
-      <Filter>Module</Filter>
-    </QtMoc>
-    <QtMoc Include="Module.h">
-      <Filter>Module</Filter>
-    </QtMoc>
     <QtMoc Include="SPDData.h">
       <Filter>Data</Filter>
     </QtMoc>
@@ -152,7 +137,7 @@
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Widget H</Filter>
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,10 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include<Qt3DInput/qmouseevent.h>
+#include <Qt3DInput/qmouseevent.h>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 #include "ui_SPDS_Client.h"
 
@@ -27,6 +30,8 @@ public slots:
     void on_minimize_clicked();
     void on_maximize_clicked();
     void on_serverConfigButton_clicked();
+    void setUserName(QString userName = u8"Î´µÇÂ¼");
+    void setUserToken(QString userName, QString token);
 
 private slots:
     void on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, int itemID);
@@ -35,6 +40,9 @@ private:
     void showDetection();
     void showVisualization();
     void showFamilial();
+    QSqlDatabase openDatabase();
+    QVariant getUserToken();
+    void createTable(QSqlDatabase db);
 
 private:
     enum Location
@@ -50,4 +58,5 @@ private:
     //´°Ìå¿ÉÒÆ¶¯
     QPoint pLast;
     bool m_bPressed; 
+    QString token;
 };

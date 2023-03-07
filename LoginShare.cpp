@@ -1,4 +1,5 @@
 #include "LoginShare.h"
+#include "SPDS_Client.h"
 #include"UtilityClass.h"
 using namespace utility;
 
@@ -36,7 +37,10 @@ void LoginShare::openLogin()
     enroll = NULL;
 
     login = new Login(ui.widgetMain);
+
     connect(login, &Login::goEnroll, this, &LoginShare::openEnroll);
+    connect(login, &Login::setUserName, (SPDS_Client*) this->parent(), &SPDS_Client::setUserName);
+    connect(login, &Login::setUserToken, (SPDS_Client*) this->parent(), &SPDS_Client::setUserToken);
     login->show();
 }
 
