@@ -116,13 +116,10 @@
     <QtMoc Include="Visualization.h">
       <Filter>Widget H</Filter>
     </QtMoc>
-    <QtMoc Include="SPDDataPerDay.h">
-      <Filter>Data</Filter>
-    </QtMoc>
-    <QtMoc Include="SPDData.h">
-      <Filter>Data</Filter>
-    </QtMoc>
     <QtMoc Include="TcpSocket.h">
+      <Filter>Tcp Socket</Filter>
+    </QtMoc>
+    <QtMoc Include="TcpData.h">
       <Filter>Tcp Socket</Filter>
     </QtMoc>
   </ItemGroup>
@@ -130,14 +127,17 @@
     <ClInclude Include="UtilityClass.h">
       <Filter>Utility Class</Filter>
     </ClInclude>
-    <ClInclude Include="TcpData.h">
-      <Filter>Tcp Socket</Filter>
-    </ClInclude>
     <ClInclude Include="MessageJson.h">
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPDData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SPDDataPerDay.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@
 
 #include "ui_Detection.h"
 #include "VideoSurface.h"
-#include "SPDData.h"
+#include "TcpData.h"
 //#include "Module.h"
 
 class Detection : public QWidget
