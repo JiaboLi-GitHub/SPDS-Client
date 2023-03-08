@@ -72,13 +72,16 @@
     <ClCompile Include="TcpSocket.cpp">
       <Filter>Tcp Socket</Filter>
     </ClCompile>
-    <ClCompile Include="MessageJson.cpp">
+    <ClCompile Include="JsonServer.cpp">
       <Filter>Json</Filter>
     </ClCompile>
     <ClCompile Include="ServerConfig.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
     <ClCompile Include="Visualization.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SPDS_Server\SPDData.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,18 +114,21 @@
       <Filter>Tcp Socket</Filter>
     </QtMoc>
     <QtMoc Include="TcpData.h">
-      <Filter>Tcp Socket</Filter>
+      <Filter>Widget H</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UtilityClass.h">
       <Filter>Utility Class</Filter>
     </ClInclude>
-    <ClInclude Include="MessageJson.h">
+    <ClInclude Include="JsonServer.h">
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SPDS_Server\SPDData.h">
+      <Filter>Widget H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

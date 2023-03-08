@@ -2,9 +2,8 @@
 #include <qobject.h>
 #include <qdatetime.h>
 
-class TcpData : QObject
+class TcpData
 {
-	Q_OBJECT
 public:
 	TcpData();
 	~TcpData();
@@ -56,9 +55,8 @@ private:
 	qint32 normal, head, front, back, left, right;
 };
 
-class SPDData :QObject
+class SPDData
 {
-	Q_OBJECT
 public:
 	//检测结果
 	enum Detection_Result
@@ -81,14 +79,10 @@ public:
 	int result;//监测结果
 };
 
-class EnrollData:QObject
+class EnrollData
 {
-	Q_OBJECT
 public:
-	EnrollData(QString userName, QString mailAddress, QString password,
-		int code, int enroll_response):
-	userName(userName),mailAddress(mailAddress), password(password),
-		code(code), enroll_response(enroll_response){}
+	EnrollData(){}
 	~EnrollData() {}
 
 public:
@@ -107,14 +101,10 @@ public:
 	int enroll_response;
 };
 
-class LoginData :QObject
+class LoginData
 {
-	Q_OBJECT
 public:
-	LoginData(QString userName, QString mailAddress, QString password,
-		QString token, int login_response) :
-		userName(userName), mailAddress(mailAddress), password(password),
-		token(token), login_response(login_response) {}
+	LoginData();
 	~LoginData() {};
 
 public:
