@@ -6,13 +6,10 @@ QTcpSocket* TcpSocket::tcpSocket = new QTcpSocket();
 
 
 TcpSocket::TcpSocket()
-{
-		
-}
+{}
 
 TcpSocket::~TcpSocket()
-{
-}
+{}
 
 /*************************************************
 Description: 连接服务端

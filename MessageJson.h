@@ -7,13 +7,21 @@ class MessageJson
 {
 public:
 	static QByteArray verificationDataToQByteArray(QString id);
-	static QByteArray loginDataToQByteArray(QString mailAddress, QString password);
+	static QByteArray loginDataToQByteArray(LoginData loginData);
 	static QByteArray autoLoginDataToQByteArray(QString token);
-	static QByteArray enrollToQByteArray(QString mailAddress, QString password, QString userName, QString code);
+	static QByteArray enrollToQByteArray(EnrollData enrolldata);
 	
 public:
-	static TcpData::ResponseType getResponseType(QByteArray& byteArray);
-	static QMap<QString, QString> getResponseData(QByteArray& byteArray);
+	static TcpData::RequestType getRequestType(QByteArray& byteArray);
+	static QString getMailAddress(QByteArray& byteArray);
+
+	static EnrollData toEnrollData(QByteArray& byteArray);
+	static LoginData toLogInData(QByteArray& byteArray);
+	static SPDData toSPDOnceData(QByteArray& byteArray);
+
+	static QByteArray toQByteArray(EnrollData data);
+	static QByteArray toQByteArray(LoginData data);
+	static QByteArray toQByteArray(QVector<SPDData> dataList);
 
 private:
 	static QStringList getResponseStr(TcpData::ResponseType type);

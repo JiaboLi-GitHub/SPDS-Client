@@ -42,7 +42,7 @@ private:
     void showFamilial();
     QSqlDatabase openDatabase();
     QVariant getUserToken();
-    void createTable(QSqlDatabase db);
+    void createTokensTable(QSqlDatabase db);
     void autoLogin();
 
 private:

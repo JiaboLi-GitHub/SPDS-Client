@@ -1,4 +1,6 @@
 #include "MessageJson.h"
+#include "TcpData.h"
+
 #include<qstring.h>
 #include<qmap.h>
 #include<qjsondocument.h>
@@ -30,12 +32,13 @@ QByteArray MessageJson::verificationDataToQByteArray(QString mailAddress)
 
 /*************************************************
 Description: 生成登录信息字节流
-      Input: mailAddress=邮箱信息
-             password=密码信息
+      Input: loginData=登录信息
      Return: 登录信息的字节流
 *************************************************/
-QByteArray MessageJson::loginDataToQByteArray(QString mailAddress, QString password)
+QByteArray MessageJson::loginDataToQByteArray(LoginData loginData)
 {
+    QString mailAddress = loginData.mailAddress; 
+    QString password = loginData.password;
     QJsonObject verificationData_json;
     verificationData_json.insert("RequestType", TcpData::RequestType::LogIn_Request);
     QJsonObject data_json;
@@ -66,14 +69,15 @@ QByteArray MessageJson::autoLoginDataToQByteArray(QString token)
 
 /*************************************************
 Description: 生成注册信息字节流
-      Input: mailAddress=邮箱信息
-             password=密码信息
-             userName=用户名信息
-             code=验证码信息
+      Input: enrolldata=注册信息
      Return: 注册信息的字节流
 *************************************************/
-QByteArray MessageJson::enrollToQByteArray(QString mailAddress, QString password, QString userName, QString code)
+QByteArray MessageJson::enrollToQByteArray(EnrollData enrolldata)
 {
+    QString mailAddress = enrolldata.mailAddress;
+    QString password = enrolldata.password;
+    QString userName = enrolldata.userName; 
+    QString code = enrolldata.code;
     QJsonObject verificationData_json;
     verificationData_json.insert("RequestType", TcpData::RequestType::Enroll_Request);
     QJsonObject data_json;
@@ -88,42 +92,6 @@ QByteArray MessageJson::enrollToQByteArray(QString mailAddress, QString password
 }
 
 /*************************************************
-Description: 解析请求类型
-	  Input: 来自客户端的请求字节数组
-	 Return: 请求类型
-*************************************************/
-TcpData::ResponseType MessageJson::getResponseType(QByteArray& byteArray)
-{
-	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
-	QJsonObject response_json = document.object();
-	int typeId = response_json["ResponseType"].toInt();
-	TcpData::ResponseType type = TcpData::ResponseType(typeId);
-	return type;
-}
-
-/*************************************************
-Description: 解析请求数据
-	  Input: 来自客户端的请求字节数组
-	 Return: 解析完成的数据
-*************************************************/
-QMap<QString, QString> MessageJson::getResponseData(QByteArray& byteArray)
-{
-	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
-	QJsonObject response_json = document.object();
-	QJsonObject data_json = response_json["data"].toObject();
-	int typeId = response_json["ResponseType"].toInt();
-	TcpData::ResponseType type = TcpData::ResponseType(typeId);
-	QStringList keyList = getResponseStr(type);
-
-	QMap<QString, QString> data;
-	for (auto& key : keyList)
-	{
-		data[key] = data_json[key].toString();
-	}
-	return data;
-}
-
-/*************************************************
 Description: 根据请求类型获取数据格式
       Input: 请求类型
      Return: 数据格式
@@ -135,6 +103,7 @@ QStringList MessageJson::getResponseStr(TcpData::ResponseType type)
     {
     case TcpData::Enroll_Response:	responseStr = Enroll_Response_Str; break;
     case TcpData::LogIn_Response:	responseStr = Login_Response_Str; break;
+    case TcpData::Detection_Read_Response: responseStr = Detection_Read_Response_Str; break;
     default:throw QException();
         break;
     }

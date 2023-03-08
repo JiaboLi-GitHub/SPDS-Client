@@ -31,23 +31,6 @@ public:
 		Auto_Login_Response //自动登录响应
 	};
 
-	//注册响应类型
-	enum Enroll_Response
-	{
-		Enroll_Correct,		//注册成功
-		Code_Error,			//验证码错误
-		Exist_Error,		//账号已注册
-		Enroll_error		//未知错误
-	};
-
-	//登录响应类型
-	enum Login_Response
-	{
-		Login_Correct,		//登录成功
-		Account_Error,		//账号错误
-		Login_error			//未知错误
-	};
-
 	enum Auto_Login_Response
 	{
 		Auto_Login_Correct,    //自动登录成功
@@ -95,5 +78,57 @@ public:
 
 public:
 	QDate date;		//日期
-	Detection_Result result;//监测结果
+	int result;//监测结果
+};
+
+class EnrollData:QObject
+{
+	Q_OBJECT
+public:
+	EnrollData(QString userName, QString mailAddress, QString password,
+		int code, int enroll_response):
+	userName(userName),mailAddress(mailAddress), password(password),
+		code(code), enroll_response(enroll_response){}
+	~EnrollData() {}
+
+public:
+	//注册响应类型
+	enum Enroll_Response
+	{
+		Enroll_Correct,		//注册成功
+		Code_Error,			//验证码错误
+		Exist_Error,		//账号已注册
+		Enroll_error		//未知错误
+	};
+	QString userName;
+	QString mailAddress;
+	QString password;
+	int code;
+	int enroll_response;
+};
+
+class LoginData :QObject
+{
+	Q_OBJECT
+public:
+	LoginData(QString userName, QString mailAddress, QString password,
+		QString token, int login_response) :
+		userName(userName), mailAddress(mailAddress), password(password),
+		token(token), login_response(login_response) {}
+	~LoginData() {};
+
+public:
+	//登录响应类型
+	enum Login_Response
+	{
+		Login_Correct,		//登录成功
+		Account_Error,		//账号错误（账号不存在）
+		Password_Error,		//密码错误
+		Login_Error			//未知错误
+	};
+	QString userName;
+	QString mailAddress;
+	QString password;
+	QString token;
+	int login_response;
 };

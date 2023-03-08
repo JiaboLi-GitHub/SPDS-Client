@@ -223,7 +223,7 @@ void SPDS_Client::setUserName(QString userName)
 void SPDS_Client::setUserToken(QString userName, QString token)
 {
     QSqlDatabase db = openDatabase();
-    createTable(db);
+    createTokensTable(db);
 
     QSqlQuery query(db);
     query.exec("DROP * FROM tokens");
@@ -238,7 +238,7 @@ void SPDS_Client::setUserToken(QString userName, QString token)
 QVariant SPDS_Client::getUserToken()
 {
     QSqlDatabase db = openDatabase();
-    createTable(db);
+    createTokensTable(db);
 
     QSqlQuery query(db);
     bool exist = query.exec("SELECT * FROM tokens");
@@ -256,8 +256,6 @@ QVariant SPDS_Client::getUserToken()
 
     QVariant data;
     data.setValue(qMakePair(token, userName));
-
-    setUserName(userName)£»
 
     return data;
 }
@@ -396,7 +394,7 @@ QSqlDatabase SPDS_Client::openDatabase()
     return database;
 }
 
-void SPDS_Client::createTable(QSqlDatabase db)
+void SPDS_Client::createTokensTable(QSqlDatabase db)
 {
     QSqlQuery query(db);
     bool exist = query.exec("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'tokens'");
@@ -408,6 +406,3 @@ void SPDS_Client::createTable(QSqlDatabase db)
 
     return;
 }
-
-
-
