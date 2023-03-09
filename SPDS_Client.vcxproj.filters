@@ -113,9 +113,6 @@
     <QtMoc Include="TcpSocket.h">
       <Filter>Tcp Socket</Filter>
     </QtMoc>
-    <QtMoc Include="TcpData.h">
-      <Filter>Widget H</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UtilityClass.h">
@@ -128,6 +125,9 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="..\SPDS_Server\SPDData.h">
+      <Filter>Widget H</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpData.h">
       <Filter>Widget H</Filter>
     </ClInclude>
   </ItemGroup>

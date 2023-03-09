@@ -37,10 +37,8 @@ public:
 	};
 };
 
-class SPDDataPerDay : public QObject
+class SPDDataPerDay
 {
-	Q_OBJECT
-
 public:
 	SPDDataPerDay(QDate date, double accuracy, qint32 totalCount, qint32 normal,
 		qint32 head, qint32 front, qint32 back, qint32 left, qint32 right) :
@@ -77,6 +75,17 @@ public:
 public:
 	QDate date;		//日期
 	int result;//监测结果
+};
+
+
+class CodeData
+{
+public:
+	CodeData() {};
+	~CodeData() {};
+
+public:
+	QString mailAddress;
 };
 
 class EnrollData
@@ -121,4 +130,11 @@ public:
 	QString password;
 	QString token;
 	int login_response;
+};
+
+class QuitData
+{
+public:
+	QuitData() {};
+	~QuitData() {};
 };

@@ -27,8 +27,8 @@ TcpData::RequestType JsonServer::getRequestType(QByteArray& byteArray)
 	return type;
 }
 
-//验证码没有
 
+//注册
 EnrollData JsonServer::toEnrollData(QByteArray& byteArray)
 {
 	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
@@ -40,6 +40,7 @@ EnrollData JsonServer::toEnrollData(QByteArray& byteArray)
 	return enrollData;
 }
 
+//登录
 LoginData JsonServer::toLogInData(QByteArray& byteArray)
 {
 	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
@@ -54,6 +55,7 @@ LoginData JsonServer::toLogInData(QByteArray& byteArray)
 	return loginData;
 }
 
+//5天数据
 QVector<SPDData> JsonServer::toSPDDataList(QByteArray& byteArray)
 {
 	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
@@ -79,6 +81,18 @@ QVector<SPDData> JsonServer::toSPDDataList(QByteArray& byteArray)
 	return spdDataList;
 }
 
+//验证码
+QByteArray JsonServer::toQByteArray(CodeData data)
+{
+	QJsonObject requestData_json, data_json;
+	data_json.insert("mailAddress", data.mailAddress);
+	requestData_json.insert("RequestType", TcpData::VerificationCode);
+	requestData_json.insert("data", data_json);
+	QJsonDocument document = QJsonDocument::QJsonDocument(requestData_json);
+	return document.toBinaryData();
+}
+
+//注册
 QByteArray JsonServer::toQByteArray(EnrollData data)
 {
 	QJsonObject requestData_json, data_json;
@@ -92,6 +106,7 @@ QByteArray JsonServer::toQByteArray(EnrollData data)
 	return document.toBinaryData();
 }
 
+//登录
 QByteArray JsonServer::toQByteArray(LoginData data)
 {
 	QJsonObject requestData_json, data_json;
@@ -103,15 +118,15 @@ QByteArray JsonServer::toQByteArray(LoginData data)
 	return document.toBinaryData();
 }
 
+//一次检测数据
 QByteArray JsonServer::toQByteArray(SPDOnceData data)
 {
-	QJsonObject ResponseData_json;
+	QJsonObject reqData_json;
 	QJsonArray dataList_json;
-
-	//差
-
-	ResponseData_json.insert("RequestType", TcpData::Detection_Read_Response);
-	ResponseData_json.insert("data", dataList_json);
-	QJsonDocument document = QJsonDocument::QJsonDocument(ResponseData_json);
+	reqData_json.insert("date", data.date.toString());
+	reqData_json.insert("Detection_Result", data.result);
+	reqData_json.insert("RequestType", TcpData::Detection_Save_Request);
+	reqData_json.insert("data", dataList_json);
+	QJsonDocument document = QJsonDocument::QJsonDocument(reqData_json);
 	return document.toBinaryData();
 }
