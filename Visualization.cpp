@@ -9,7 +9,7 @@
 
 #include "Visualization.h"
 
-Visualization::Visualization(QWidget* parent)
+Visualization::Visualization(QWidget* parent, QVector<SPDData> &dataList)
 	:QWidget(parent)
 {
 	ui.setupUi(this);
@@ -42,18 +42,9 @@ Visualization::Visualization(QWidget* parent)
 		thirdChart->setTitleFont(f12);
 	}
 
-	initListWidget(
-		listWidget, 5,
-		initQPieChartView("2023/2/14", 1080, 0, 0, 0, 0, 0),
-		initQPieChartView("2023/2/13", 15, 2, 3, 11, 4, 12),
-		initQPieChartView("2023/2/12", 15, 15, 35, 13, 45, 05),
-		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
-		/*initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
-		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
-		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
-		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),*/
-		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25)
-	);
+	topieChartViewList(dataList);
+
+	initListWidget(listWidget,pieChartViewList);
 }
 
 Visualization::~Visualization()
@@ -64,13 +55,13 @@ Visualization::~Visualization()
 QChart* Visualization::initQLineChart()
 {
 	QLineSeries* series = new QLineSeries(this);
-	series->append(0, 80);
-	series->append(1, 60);
-	series->append(2, 40);
-	series->append(3, 60);
-	series->append(4, 25);
-	series->append(5, 90);
-	series->append(6, 100);
+	//series->append(0, 80);
+	//series->append(1, 60);
+	//series->append(2, 40);
+	//series->append(3, 60);
+	//series->append(4, 25);
+	//series->append(5, 90);
+	//series->append(6, 100);
 
 	QChart* chart = new QChart;
 	chart->setParent(this);
@@ -85,15 +76,23 @@ QChart* Visualization::initQLineChart()
 	chart->setAxisY(axisY, series);
 
 	QCategoryAxis* axisX = new QCategoryAxis(this);
-	axisX->append("2022/01/01", 0);
-	axisX->append("2022/01/02", 1);
-	axisX->append("2022/01/03", 2);
-	axisX->append("2022/01/04", 3);
-	axisX->append("2022/01/05", 4);
-	axisX->append("2022/01/06", 5);
-	axisX->append("2022/01/07", 6);
-	axisX->setRange(0, 6);
+	//axisX->append("2022/01/01", 0);
+	//axisX->append("2022/01/02", 1);
+	//axisX->append("2022/01/03", 2);
+	//axisX->append("2022/01/04", 3);
+	//axisX->append("2022/01/05", 4);
+	//axisX->append("2022/01/06", 5);
+	//axisX->append("2022/01/07", 6);
+	//axisX->setRange(0, axisX->count()-1);
 	axisX->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
+	
+
+	for (int i = dataList.size()-1; ~i; i--)
+	{
+		series->append(i, dataList[i].accuracy);
+		axisX->append(dataList[i].date.toString("yyyy/MM/dd"), i);
+	}
+
 	chart->setAxisX(axisX, series);
 
 	QMargins margin=chart->margins();
@@ -189,4 +188,34 @@ void Visualization::initListWidget(QListWidget* listWidget, qint32 count, ...)
 		listWidget->setItemWidget(item, view);
 	}
 	va_end(args);
+}
+
+void Visualization::initListWidget(QListWidget* listWidget, QVector<QChartView*> &pieChartViewList)
+{
+	listWidget->setSpacing(5);
+
+	for (auto view : pieChartViewList)
+	{
+		QListWidgetItem* item = new QListWidgetItem;
+		item->setSizeHint(QSize(300, listWidget->height() * 7));
+		listWidget->addItem(item);
+		listWidget->setItemWidget(item, view);
+	}
+	return;
+}
+
+void Visualization::topieChartViewList(QVector<SPDData> &dataList)
+{
+	for(auto data:dataList)
+	{
+		QString date = data.date.toString("yyyy/MM/dd");
+		qint32 pos0 = data.normal;
+		qint32 pos1 = data.head;
+		qint32 pos2 = data.front;
+		qint32 pos3 = data.back;
+		qint32 pos4 = data.left;
+		qint32 pos5 = data.right;
+
+		this->pieChartViewList.append(initQPieChartView(date,pos0,pos1,pos2,pos3,pos4,pos5));
+	}
 }

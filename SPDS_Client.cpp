@@ -232,6 +232,8 @@ void SPDS_Client::setUserToken(QString userName, QString token)
     query.bindValue(":token", token);
     query.exec();
 
+    this->token = token;
+
     db.close();
 }
 
@@ -352,6 +354,11 @@ void SPDS_Client::showVisualization()
 {
     if (location == Loc_Visualization)
     {
+        return;
+    }
+    if (token.isEmpty())
+    {
+        QMessageBox::warning(NULL, u8"用户未登录", u8"请先登录再使用该功能！", QMessageBox::Ok);
         return;
     }
     location = Loc_Visualization;
