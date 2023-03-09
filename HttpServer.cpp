@@ -1,4 +1,5 @@
 #include "HttpServer.h"
+#include"JsonServer.h"
 
 const QString HttpServer::URL= "http://127.0.0.1:8989/image";
 
@@ -22,13 +23,16 @@ void HttpServer::init()
     connect(nam, &QNetworkAccessManager::finished, this, &HttpServer::resPost);
 }
 
-void HttpServer::post(QByteArray byteArray)
+//检测请求
+void HttpServer::post(SPDOnceData data)
 {
+	QByteArray byteArray = JsonServer::toHTTPQByteArray(data);
 	QNetworkReply* reply = nam->post(*request, byteArray);
 }
 
+//检测完成后调用的槽函数
 void HttpServer::resPost(QNetworkReply* reply)
 {
 	QByteArray byteArray = reply->readAll();
-
+	SPDOnceData data = JsonServer::toSPDOnceData(byteArray);
 }

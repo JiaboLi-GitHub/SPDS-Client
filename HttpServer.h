@@ -4,6 +4,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include<qstring.h>
+#include"SPDData.h"
 
 class HttpServer :
     public QObject
@@ -12,7 +13,7 @@ public:
     HttpServer();
     ~HttpServer();
     void init();
-    void post(QByteArray byteArray);
+    void post(SPDOnceData data);
 
 public slots:
     void resPost(QNetworkReply* reply);

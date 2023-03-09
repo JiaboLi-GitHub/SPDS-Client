@@ -4,6 +4,7 @@
 #include<qsqlerror.h>
 #include<qdatetime.h>
 #include<qjsonobject.h>
+#include<qimage.h>
 
 class SPDOnceData
 {
@@ -27,6 +28,7 @@ public:
 
 public:
 	QDate date;		//日期
+	QImage image;
 	Detection_Result result;//监测结果
 };
 

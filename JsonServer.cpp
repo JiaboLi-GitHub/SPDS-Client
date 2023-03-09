@@ -8,7 +8,9 @@
 #include<qstringlist.h>
 #include"TcpData.h"
 #include<qdebug.h>
+
 #include"SPDData.h"
+#include <QtCore/qbuffer.h>
 
 /*************************************************
 Description: 解析请求类型
@@ -77,6 +79,17 @@ QVector<SPDData> JsonServer::toSPDDataList(QByteArray& byteArray)
 	return spdDataList;
 }
 
+SPDOnceData JsonServer::toSPDOnceData(QByteArray& byteArray)
+{
+	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
+	QJsonObject http_json = document.object();
+
+	SPDOnceData data;
+	data.date = QDate::fromString(http_json["time"].toString(),"yyyy-MM-dd");
+	data.result = (SPDOnceData::Detection_Result)http_json["data"].toInt();
+	return data;
+}
+
 //验证码
 QByteArray JsonServer::toQByteArray(CodeData data)
 {
@@ -135,5 +148,24 @@ QByteArray JsonServer::toQByteArray(GetSPDData data)
 	requestData_json.insert("RequestType", TcpData::Detection_Read_Request);
 	requestData_json.insert("data", data_json);
 	QJsonDocument document = QJsonDocument::QJsonDocument(requestData_json);
+	return document.toBinaryData();
+}
+
+
+QString  toBase64(QImage image)
+{
+	QByteArray ba;
+	QBuffer buf(&ba);
+	image.save(&buf, "png");
+	return ba.toBase64();
+}
+
+//用于HTTP请求的数据
+QByteArray JsonServer::toHTTPQByteArray(SPDOnceData data)
+{
+	QJsonObject http_json;
+	http_json.insert("time", data.date.toString("yyyy-MM-dd"));
+	http_json.insert("image", toBase64(data.image));
+	QJsonDocument document = QJsonDocument::QJsonDocument(http_json);
 	return document.toBinaryData();
 }
