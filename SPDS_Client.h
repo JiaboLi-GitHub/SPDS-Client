@@ -58,7 +58,7 @@ private:
     Ui::SPDS_ClientClass ui;
     //´°Ìå¿ÉÒÆ¶¯
     QPoint pLast;
-    bool m_bPressed; 
+    bool m_bPressed;
     QString userName;
     QString token;
 };

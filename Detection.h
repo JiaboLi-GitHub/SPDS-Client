@@ -7,6 +7,7 @@
 #include <QCameraInfo>
 #include <qthread.h>
 
+#include "SPDData.h"
 #include "ui_Detection.h"
 #include "VideoSurface.h"
 #include "TcpData.h"
@@ -26,7 +27,7 @@ public:
 public slots:
     void on_start_clicked();
     void _presentframe(QVideoFrame& frame); 
-    void setStatus(SPDData::Detection_Result status);
+    void setStatus(SPDOnceData::Detection_Result status);
 
 signals:
     void forward(const QImage& captureImage);

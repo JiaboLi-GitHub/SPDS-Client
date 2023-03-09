@@ -1,7 +1,7 @@
 #include "Enroll.h"
 #include "TcpData.h"
 #include "TcpSocket.h"
-#include "MessageJson.h"
+#include "JsonServer.h"
 #include "ServerConfig.h"
 
 #include<qmessagebox.h>
@@ -63,7 +63,7 @@ void Enroll::on_requestCode_clicked()
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QString mailAddress = ui.mailAddress->text();
-        QByteArray byteArray = MessageJson::verificationDataToQByteArray(mailAddress);
+        QByteArray byteArray = JsonServer::toQByteArray(CodeData(mailAddress));
         TcpSocket::write(byteArray);
 
         countDown = 60;
@@ -100,30 +100,30 @@ bool Enroll::on_enroll_clicked()
     QString mailAddress = ui.mailAddress->text();
     QString password = ui.password->text();
     QString userName = ui.userName->text();
-    QString code = ui.code->text();
+    qint32 code = ui.code->text().toInt();
 
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
-        QByteArray byteArray = MessageJson::enrollToQByteArray(mailAddress, password,userName,code);
+        QByteArray byteArray = JsonServer::toQByteArray(EnrollData(mailAddress, password,userName,code));
         TcpSocket::write(byteArray);
 
         if (TcpSocket::isReceived())
         {
             QByteArray receivedByteArray = TcpSocket::read();
-            QMap<QString, QString> receivedData = MessageJson::getResponseData(receivedByteArray);
-            switch (receivedData["Enroll_Response"].toInt())
+            EnrollData receivedData = JsonServer::toEnrollData(receivedByteArray);
+            switch (receivedData.enroll_response)
             {
-            case TcpData::Enroll_Response::Enroll_Correct:
+            case EnrollData::Enroll_Response::Enroll_Correct:
                 QMessageBox::warning(NULL, u8"注册成功", u8"注册成功！", QMessageBox::Ok);
                 return true;
 
-            case TcpData::Enroll_Response::Exist_Error:
+            case EnrollData::Enroll_Response::Exist_Error:
                 QMessageBox::warning(NULL, u8"用户已存在", u8"该邮箱已注册，请直接登录！", QMessageBox::Ok);
                 break;
-            case TcpData::Enroll_Response::Code_Error:
+            case EnrollData::Enroll_Response::Code_Error:
                 QMessageBox::warning(NULL, u8"验证码错误", u8"请检查验证码是否正确！", QMessageBox::Ok);
                 break;
-            case TcpData::Enroll_Response::Enroll_error:
+            case EnrollData::Enroll_Response::Enroll_error:
                 QMessageBox::warning(NULL, u8"未知错误", u8"请稍后重试！", QMessageBox::Ok);
                 break;
             }

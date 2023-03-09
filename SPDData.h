@@ -1,9 +1,9 @@
+
 #pragma once
 #include<qsqlquery.h>
 #include<qsqlerror.h>
 #include<qdatetime.h>
 #include<qjsonobject.h>
-#include"CommonData.h"
 
 class SPDOnceData
 {
@@ -52,4 +52,3 @@ public:
     int     left;       //×óÇã
     int     right;      //ÓÒÇã
 };
-

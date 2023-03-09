@@ -12,7 +12,7 @@
 #include <qhostinfo.h>
 #include <qmessagebox.h>
 
-#include "MessageJson.h"
+#include "JsonServer.h"
 #include "Detection.h"
 #include "UtilityClass.h"
 #include "Login.h"
@@ -232,6 +232,8 @@ void SPDS_Client::setUserToken(QString userName, QString token)
     query.bindValue(":token", token);
     query.exec();
 
+    this->token = token;
+
     db.close();
 }
 
@@ -262,6 +264,7 @@ QVariant SPDS_Client::getUserToken()
 
 void SPDS_Client::autoLogin()
 {
+    /*
     QVariant userInfo = getUserToken();
     if (userInfo.isNull())
     {
@@ -274,7 +277,7 @@ void SPDS_Client::autoLogin()
 
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
-        QByteArray byteArray = MessageJson::autoLoginDataToQByteArray(token);
+        QByteArray byteArray = JsonServer::toLogInData(token);
         TcpSocket::write(byteArray);
 
         if (TcpSocket::isReceived())
@@ -311,6 +314,7 @@ void SPDS_Client::autoLogin()
             QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器！", QMessageBox::Ok);
         }
     }
+    */
 }
 
 
@@ -352,13 +356,46 @@ void SPDS_Client::showVisualization()
     {
         return;
     }
+    if (token.isEmpty())
+    {
+        QMessageBox::warning(NULL, u8"用户未登录", u8"请先登录再使用该功能！", QMessageBox::Ok);
+        return;
+    }
     location = Loc_Visualization;
 
-    Visualization* visualization = new Visualization(this);
-    visualization->setGeometry(ui.mainWidget->geometry());
-    delete ui.mainWidget;
-    ui.mainWidget = visualization;
-    visualization->show();
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    {
+        QByteArray byteArray = JsonServer::toQByteArray(GetSPDData(token));
+        TcpSocket::write(byteArray);
+
+        if (TcpSocket::isReceived())
+        {
+            QByteArray receivedByteArray = TcpSocket::read();
+            auto receivedData = JsonServer::toSPDDataList(receivedByteArray);
+
+            Visualization* visualization = new Visualization(this, receivedData);
+            visualization->setGeometry(ui.mainWidget->geometry());
+            delete ui.mainWidget;
+            ui.mainWidget = visualization;
+            visualization->show();
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"服务器无回应！", QMessageBox::Ok);
+        }
+    }
+    else
+    {
+        QHostInfo info = QHostInfo::fromName("baidu.com");
+        if (info.error() != QHostInfo::NoError)
+        {
+            QMessageBox::warning(NULL, toUTF8("网络错误"), toUTF8("请检查网络连接！"), QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器！", QMessageBox::Ok);
+        }
+    }
 }
 
 void SPDS_Client::showFamilial()

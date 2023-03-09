@@ -10,9 +10,6 @@
 #include<qdebug.h>
 #include"SPDData.h"
 
-
-
-
 /*************************************************
 Description: 解析请求类型
 	  Input: 
@@ -26,7 +23,6 @@ TcpData::RequestType JsonServer::getRequestType(QByteArray& byteArray)
 	TcpData::RequestType type = TcpData::RequestType(typeId);
 	return type;
 }
-
 
 //注册
 EnrollData JsonServer::toEnrollData(QByteArray& byteArray)
@@ -128,5 +124,16 @@ QByteArray JsonServer::toQByteArray(SPDOnceData data)
 	reqData_json.insert("RequestType", TcpData::Detection_Save_Request);
 	reqData_json.insert("data", dataList_json);
 	QJsonDocument document = QJsonDocument::QJsonDocument(reqData_json);
+	return document.toBinaryData();
+}
+
+//请求检测数据
+QByteArray JsonServer::toQByteArray(GetSPDData data)
+{
+	QJsonObject requestData_json, data_json;
+	data_json.insert("token", data.token);
+	requestData_json.insert("RequestType", TcpData::Detection_Read_Request);
+	requestData_json.insert("data", data_json);
+	QJsonDocument document = QJsonDocument::QJsonDocument(requestData_json);
 	return document.toBinaryData();
 }
