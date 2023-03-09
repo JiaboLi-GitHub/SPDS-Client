@@ -4,7 +4,7 @@
 #include <QtNetwork>
 
 #include "TcpSocket.h"
-#include "MessageJson.h"
+#include "JsonServer.h"
 #include "ServerConfig.h"
 
 #define toUTF8(str)  QString::fromLocal8Bit(str)
@@ -46,30 +46,30 @@ bool Login::on_login_clicked()
 
     if (TcpSocket::isConnected()|| TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
-        QByteArray byteArray = MessageJson::loginDataToQByteArray(mailAddress, password);
+        QByteArray byteArray = JsonServer::toQByteArray(LoginData(mailAddress, password));
         TcpSocket::write(byteArray);
 
         if (TcpSocket::isReceived())
         {
             QByteArray receivedByteArray = TcpSocket::read();
-            QMap<QString,QString> receivedData = MessageJson::getResponseData(receivedByteArray);
-            switch (receivedData["LogIn_Response"].toInt())
+            LoginData receivedData = JsonServer::toLogInData(receivedByteArray);
+            switch (receivedData.login_response)
             {
-            case TcpData::Login_Response::Login_Correct:
+            case LoginData::Login_Response::Login_Correct:
                 QMessageBox::warning(NULL, u8"µ«¬º≥…π¶", u8"µ«¬º≥…π¶£°", QMessageBox::Ok);
                 {
-                    QString userName = receivedData["userName"];
+                    QString userName = receivedData.userName;
                     emit setUserName(userName);
 
-                    QString token = receivedData["token"];
+                    QString token = receivedData.token;
                     emit setUserToken(token, userName);
                 }
                 return true;
 
-            case TcpData::Login_Response::Account_Error:
+            case LoginData::Login_Response::Account_Error:
                 QMessageBox::warning(NULL, u8"’À∫≈¥ÌŒÛ", u8"’À∫≈ªÚ√‹¬Î¥ÌŒÛ£°", QMessageBox::Ok);
                 break;
-            case TcpData::Login_Response::Login_error:
+            case LoginData::Login_Response::Login_Error:
                 QMessageBox::warning(NULL, u8"Œ¥÷™¥ÌŒÛ", u8"«Î…‘∫Û÷ÿ ‘£°", QMessageBox::Ok);
                 break;
             }

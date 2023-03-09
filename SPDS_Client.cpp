@@ -12,7 +12,7 @@
 #include <qhostinfo.h>
 #include <qmessagebox.h>
 
-#include "MessageJson.h"
+#include "JsonServer.h"
 #include "Detection.h"
 #include "UtilityClass.h"
 #include "Login.h"
@@ -262,6 +262,7 @@ QVariant SPDS_Client::getUserToken()
 
 void SPDS_Client::autoLogin()
 {
+    /*
     QVariant userInfo = getUserToken();
     if (userInfo.isNull())
     {
@@ -274,7 +275,7 @@ void SPDS_Client::autoLogin()
 
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
-        QByteArray byteArray = MessageJson::autoLoginDataToQByteArray(token);
+        QByteArray byteArray = JsonServer::toLogInData(token);
         TcpSocket::write(byteArray);
 
         if (TcpSocket::isReceived())
@@ -311,6 +312,7 @@ void SPDS_Client::autoLogin()
             QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器！", QMessageBox::Ok);
         }
     }
+    */
 }
 
 

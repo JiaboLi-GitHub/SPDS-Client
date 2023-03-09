@@ -105,13 +105,22 @@
     </property>
    </widget>
    <widget class="QCheckBox" name="autoLogin">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>104</x>
       <y>239</y>
-      <width>71</width>
-      <height>16</height>
+      <width>0</width>
+      <height>0</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
     </property>
     <property name="text">
      <string>自动登录</string>

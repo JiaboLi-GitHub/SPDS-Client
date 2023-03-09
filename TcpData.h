@@ -37,51 +37,10 @@ public:
 	};
 };
 
-class SPDDataPerDay
-{
-public:
-	SPDDataPerDay(QDate date, double accuracy, qint32 totalCount, qint32 normal,
-		qint32 head, qint32 front, qint32 back, qint32 left, qint32 right) :
-		date(date), accuracy(accuracy), totalCount(totalCount), normal(normal), head(head),
-		front(front), back(back), left(left), right(right) {}
-	~SPDDataPerDay() = default;
-
-private:
-	QDate date;
-	double accuracy;
-	qint32 totalCount;
-	qint32 normal, head, front, back, left, right;
-};
-
-class SPDData
-{
-public:
-	//检测结果
-	enum Detection_Result
-	{
-		Normal, //正常
-		Head,   //托头
-		Front,  //前倾
-		Back,   //后倾
-		Left,   //左倾
-		Right   //右倾
-	};
-
-public:
-	SPDData(QDate date, Detection_Result result) :
-		date(date), result(result) {}
-	~SPDData() = default;
-
-public:
-	QDate date;		//日期
-	int result;//监测结果
-};
-
-
 class CodeData
 {
 public:
-	CodeData() {};
+	CodeData(QString mailAddress):mailAddress(mailAddress){}
 	~CodeData() {};
 
 public:
@@ -91,7 +50,10 @@ public:
 class EnrollData
 {
 public:
-	EnrollData(){}
+	EnrollData() {};
+	EnrollData(QString userName, QString mailAddress, QString password, int code) : 
+		userName(userName), mailAddress(mailAddress), password(password), 
+		code(code) {}
 	~EnrollData() {}
 
 public:
@@ -113,7 +75,9 @@ public:
 class LoginData
 {
 public:
-	LoginData();
+	LoginData() {};
+	LoginData(QString mailAddress, QString password) 
+		: mailAddress(mailAddress), password(password){}
 	~LoginData() {};
 
 public:
@@ -137,4 +101,11 @@ class QuitData
 public:
 	QuitData() {};
 	~QuitData() {};
+};
+
+class AutoLogInData 
+{
+public:
+	AutoLogInData() {};
+	~AutoLogInData() {};
 };

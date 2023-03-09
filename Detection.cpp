@@ -1,4 +1,5 @@
 #include "Detection.h"
+#include "SPDData.h"
 
 #include <QDateTime>
 #include <QMetaType>
@@ -108,26 +109,26 @@ void Detection::_presentframe(QVideoFrame& frame)
     ui.cameraStart->setScaledContents(true);
 }
 
-void Detection::setStatus(SPDData::Detection_Result status)
+void Detection::setStatus(SPDOnceData::Detection_Result status)
 {
     switch (status)
     {
-    case SPDData::Detection_Result::Normal:
+    case SPDOnceData::Detection_Result::Normal:
         ui.status->setText(u8"×ø×ËÕý³£");
         break;
-    case SPDData::Detection_Result::Head:
+    case SPDOnceData::Detection_Result::Head:
         ui.status->setText(u8"ÍÐÍ·");
         break;
-    case SPDData::Detection_Result::Front:
+    case SPDOnceData::Detection_Result::Front:
         ui.status->setText(u8"×ø×ËÇ°Çã");
         break;
-    case SPDData::Detection_Result::Back:
+    case SPDOnceData::Detection_Result::Back:
         ui.status->setText(u8"×ø×ËºóÇã");
         break;
-    case SPDData::Detection_Result::Left:
+    case SPDOnceData::Detection_Result::Left:
         ui.status->setText(u8"×ø×Ë×óÇã");
         break;
-    case SPDData::Detection_Result::Right:
+    case SPDOnceData::Detection_Result::Right:
         ui.status->setText(u8"×ø×ËÓÒÇã");
         break;
     }
