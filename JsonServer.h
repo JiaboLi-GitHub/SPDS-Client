@@ -18,5 +18,6 @@ public:
 	static QByteArray toQByteArray(EnrollData data);
 	static QByteArray toQByteArray(LoginData data);
 	static QByteArray toQByteArray(SPDOnceData data);
+	static QByteArray toQByteArray(GetSPDData data);
 };
 

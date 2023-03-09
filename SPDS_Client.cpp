@@ -363,11 +363,39 @@ void SPDS_Client::showVisualization()
     }
     location = Loc_Visualization;
 
-    Visualization* visualization = new Visualization(this);
-    visualization->setGeometry(ui.mainWidget->geometry());
-    delete ui.mainWidget;
-    ui.mainWidget = visualization;
-    visualization->show();
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    {
+        QByteArray byteArray = JsonServer::toQByteArray(GetSPDData(token));
+        TcpSocket::write(byteArray);
+
+        if (TcpSocket::isReceived())
+        {
+            QByteArray receivedByteArray = TcpSocket::read();
+            auto receivedData = JsonServer::toSPDDataList(receivedByteArray);
+
+            Visualization* visualization = new Visualization(this, receivedData);
+            visualization->setGeometry(ui.mainWidget->geometry());
+            delete ui.mainWidget;
+            ui.mainWidget = visualization;
+            visualization->show();
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"服务器无回应！", QMessageBox::Ok);
+        }
+    }
+    else
+    {
+        QHostInfo info = QHostInfo::fromName("baidu.com");
+        if (info.error() != QHostInfo::NoError)
+        {
+            QMessageBox::warning(NULL, toUTF8("网络错误"), toUTF8("请检查网络连接！"), QMessageBox::Ok);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, u8"网络错误", u8"无法连接到服务器！", QMessageBox::Ok);
+        }
+    }
 }
 
 void SPDS_Client::showFamilial()

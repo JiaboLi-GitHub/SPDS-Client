@@ -126,3 +126,14 @@ QByteArray JsonServer::toQByteArray(SPDOnceData data)
 	QJsonDocument document = QJsonDocument::QJsonDocument(reqData_json);
 	return document.toBinaryData();
 }
+
+//ÇëÇó¼ì²âÊý¾Ý
+QByteArray JsonServer::toQByteArray(GetSPDData data)
+{
+	QJsonObject requestData_json, data_json;
+	data_json.insert("token", data.token);
+	requestData_json.insert("RequestType", TcpData::Detection_Read_Request);
+	requestData_json.insert("data", data_json);
+	QJsonDocument document = QJsonDocument::QJsonDocument(requestData_json);
+	return document.toBinaryData();
+}

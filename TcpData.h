@@ -109,3 +109,12 @@ public:
 	AutoLogInData() {};
 	~AutoLogInData() {};
 };
+
+class GetSPDData 
+{
+public:
+	GetSPDData(QString token):token(token) {}
+	~GetSPDData() {};
+
+	QString token;
+};

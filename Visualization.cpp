@@ -19,6 +19,7 @@ Visualization::Visualization(QWidget* parent, QVector<SPDData> &dataList)
 	thirdWidget = ui.thirdWidget;
 	listWidget = ui.listWidget;
 	availableItem = 0;
+	this->dataList = dataList;
 
 	QChart* mainChart, * secondChart, * thirdChart;
 	mainChart = initQLineChart();
@@ -42,7 +43,7 @@ Visualization::Visualization(QWidget* parent, QVector<SPDData> &dataList)
 		thirdChart->setTitleFont(f12);
 	}
 
-	topieChartViewList(dataList);
+	topieChartViewList(this->dataList);
 
 	initListWidget(listWidget,pieChartViewList);
 }
@@ -89,8 +90,8 @@ QChart* Visualization::initQLineChart()
 
 	for (int i = dataList.size()-1; ~i; i--)
 	{
-		series->append(i, dataList[i].accuracy);
-		axisX->append(dataList[i].date.toString("yyyy/MM/dd"), i);
+		series->append(series->count(), dataList[i].accuracy);
+		axisX->append(dataList[i].date.toString("yyyy/MM/dd"), axisX->count());
 	}
 
 	chart->setAxisX(axisX, series);
