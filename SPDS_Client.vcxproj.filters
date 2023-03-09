@@ -84,6 +84,9 @@
     <ClCompile Include="..\SPDS_Server\SPDData.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="HttpServer.cpp">
+      <Filter>Widget Cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SPDS_Client.h">
@@ -128,6 +131,9 @@
       <Filter>Widget H</Filter>
     </ClInclude>
     <ClInclude Include="TcpData.h">
+      <Filter>Widget H</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServer.h">
       <Filter>Widget H</Filter>
     </ClInclude>
   </ItemGroup>
