@@ -11,6 +11,7 @@
 #include "ui_Detection.h"
 #include "VideoSurface.h"
 #include "TcpData.h"
+#include "HttpServer.h"
 //#include "Module.h"
 
 class Detection : public QWidget
@@ -40,7 +41,11 @@ private:
     //…„œÒÕ∑
     QCamera* camera = NULL;
     VideoSurface* videoSurface = NULL;
+    HttpServer* httpserver = NULL;
     QImage img;
+    QDateTime lastTime;
+
+    static const qint32 timeGap = 3000;//ºÏ≤‚º‰œ∂
     //Module* module = NULL;
     //QThread* moduleThread = NULL;
 };

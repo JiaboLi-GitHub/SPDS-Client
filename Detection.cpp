@@ -19,6 +19,10 @@ Detection::Detection(QWidget *parent)
     ui.frame->setScaledContents(true);
     ui.frame->setPixmap(QPixmap::fromImage(image));
 
+    httpserver = new HttpServer();
+    connect(httpserver, &HttpServer::setStatus, this, &Detection::setStatus);
+    lastTime = QDateTime::currentDateTime();
+
     //module = new Module(this);
     //moduleThread = new QThread(this);
     //module->moveToThread(moduleThread);
@@ -111,6 +115,12 @@ void Detection::_presentframe(QVideoFrame& frame)
     matrix.rotate(180);
     img = img.transformed(matrix);
 
+    QDateTime currentTime = QDateTime::currentDateTime();
+    if (currentTime.msecsTo(lastTime) >= timeGap)
+    {
+        httpserver->post(SPDOnceData(currentTime.date(), img));
+        lastTime = currentTime;
+    }
     //emit forward(img);
 
     ui.cameraStart->setPixmap(QPixmap::fromImage(img));

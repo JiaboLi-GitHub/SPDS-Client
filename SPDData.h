@@ -22,8 +22,8 @@ public:
 
 public:
 	SPDOnceData(){};
-	SPDOnceData(QDate date, Detection_Result result) :
-		date(date), result(result) {}
+	SPDOnceData(QDate date, QImage image) :
+		date(date), image(image) {}
 	~SPDOnceData() = default;
 
 public:

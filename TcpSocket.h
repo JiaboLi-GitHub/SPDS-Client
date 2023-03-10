@@ -5,7 +5,7 @@
 
 
 class TcpSocket
-	:QObject,public QThread
+	:QObject
 {
 	Q_OBJECT
 
