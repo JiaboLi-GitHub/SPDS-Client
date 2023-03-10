@@ -9,6 +9,8 @@
 class HttpServer :
     public QObject
 {
+    Q_OBJECT
+
 public:
     HttpServer();
     ~HttpServer();
@@ -17,6 +19,9 @@ public:
 
 public slots:
     void resPost(QNetworkReply* reply);
+
+signals:
+    void setStatus(SPDOnceData::Detection_Result status);
 
 public:
     QNetworkRequest *request;

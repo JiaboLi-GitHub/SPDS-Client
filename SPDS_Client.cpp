@@ -356,11 +356,13 @@ void SPDS_Client::showVisualization()
     {
         return;
     }
+
     if (token.isEmpty())
     {
         QMessageBox::warning(NULL, u8"用户未登录", u8"请先登录再使用该功能！", QMessageBox::Ok);
         return;
     }
+
     location = Loc_Visualization;
 
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
@@ -442,4 +444,9 @@ void SPDS_Client::createTokensTable(QSqlDatabase db)
     }
 
     return;
+}
+
+bool SPDS_Client::isLogined()
+{
+    return this->token.isEmpty()!=true;
 }

@@ -1,5 +1,8 @@
 #include "HttpServer.h"
-#include"JsonServer.h"
+#include "JsonServer.h"
+#include "TcpSocket.h"
+#include "ServerConfig.h"
+#include "Detection.h"
 
 const QString HttpServer::URL= "http://127.0.0.1:8989/image";
 
@@ -35,4 +38,15 @@ void HttpServer::resPost(QNetworkReply* reply)
 {
 	QByteArray byteArray = reply->readAll();
 	SPDOnceData data = JsonServer::toSPDOnceData(byteArray);
+
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    {
+        QByteArray byteArray = JsonServer::toQByteArray(data);
+        TcpSocket::write(byteArray);
+
+        if (TcpSocket::isReceived())
+        {
+            emit setStatus(data.result);
+        }
+    }
 }

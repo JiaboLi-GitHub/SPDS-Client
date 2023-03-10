@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+#include "HttpServer.h"
 #include "ui_SPDS_Client.h"
 
 class SPDS_Client : public QMainWindow
@@ -18,6 +19,7 @@ public:
     void setStyle();
     void setLeftMenuTreeWidgetStyle();
     void setUpMenuWidgetStyle();
+    bool isLogined();
 
 protected:
     void mouseMoveEvent(QMouseEvent* event);
@@ -61,4 +63,5 @@ private:
     bool m_bPressed;
     QString userName;
     QString token;
+    HttpServer httpserver;
 };

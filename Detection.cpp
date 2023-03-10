@@ -1,10 +1,12 @@
 #include "Detection.h"
 #include "SPDData.h"
+#include "SPDS_Client.h"
 
+#include <qmessagebox.h>
 #include <QDateTime>
 #include <QMetaType>
 
-Detection::Detection(QWidget *parent)
+Detection::Detection(QWidget *parent, HttpServer &httpserver)
     : QWidget(parent)
 {
     ui.setupUi(this);
@@ -40,6 +42,12 @@ Detection::~Detection()
 
 void Detection::on_start_clicked()
 {
+    if (!((SPDS_Client*)this->parent())->isLogined())
+    {
+        QMessageBox::warning(NULL, u8"用户未登录", u8"请先登录再使用该功能！", QMessageBox::Ok);
+        return;
+    }
+
     openSt  = !openSt;
     if (openSt)
     {

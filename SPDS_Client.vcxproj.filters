@@ -35,6 +35,9 @@
     <Filter Include="SPDData">
       <UniqueIdentifier>{efaa17b7-acbc-439c-9dba-5be35b3a6d81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{ff94c342-6d48-4aad-a014-55730f5be3b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="SPDS_Client.qrc">
@@ -88,7 +91,7 @@
       <Filter>SPDData</Filter>
     </ClCompile>
     <ClCompile Include="HttpServer.cpp">
-      <Filter>Widget Cpp</Filter>
+      <Filter>Module</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +122,9 @@
     <QtMoc Include="TcpSocket.h">
       <Filter>Tcp Socket</Filter>
     </QtMoc>
+    <QtMoc Include="HttpServer.h">
+      <Filter>Module</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UtilityClass.h">
@@ -135,9 +141,6 @@
     </ClInclude>
     <ClInclude Include="TcpData.h">
       <Filter>Tcp Socket</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpServer.h">
-      <Filter>Widget H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
