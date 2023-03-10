@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include <QMetaType>
 
-Detection::Detection(QWidget *parent, HttpServer &httpserver)
+Detection::Detection(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
