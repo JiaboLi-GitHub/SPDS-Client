@@ -14,6 +14,12 @@ Visualization::Visualization(QWidget* parent, QVector<SPDData> &dataList)
 {
 	ui.setupUi(this);
 
+	if (dataList.empty())
+	{
+		dataList.push_back(SPDData(QDate()));
+		dataList.back().addSample(SPDOnceData::Detection_Result::Normal);
+	}
+
 	mainWidget = ui.mainWidget;
 	secondWidget = ui.secondWidget;
 	thirdWidget = ui.thirdWidget;

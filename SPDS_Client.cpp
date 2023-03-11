@@ -196,6 +196,21 @@ void SPDS_Client::on_maximize_clicked()
 /*---------------------------µ«¬º---------------------------------*/
 void SPDS_Client::on_login_clicked()
 {
+    if (isLogined())
+    {
+        QMessageBox::StandardButton reply = QMessageBox::question(this, u8"◊¢œ˙µ«¬º", u8"»∑∂®“™◊¢œ˙µ«¬º¬£ø", QMessageBox::Yes | QMessageBox::No);
+        if (reply == QMessageBox::Yes) 
+        {
+            logout();
+            return;
+        }
+        else 
+        {
+            return;
+        }
+
+    }
+
     //¥¥Ω®±≥æ∞’⁄’÷
     QWidget widget(this);
     widget.resize(this->width(), this->height());
@@ -262,6 +277,17 @@ QVariant SPDS_Client::getUserToken()
     return data;
 }
 
+void SPDS_Client::clearUserToken()
+{
+    QSqlDatabase db = openDatabase();
+    createTokensTable(db);
+
+    QSqlQuery query(db);
+    bool exist = query.exec("DELETE * FROM tokens");
+
+    db.close();
+}
+
 void SPDS_Client::autoLogin()
 {
     /*
@@ -317,6 +343,18 @@ void SPDS_Client::autoLogin()
     */
 }
 
+/*---------------------------◊¢œ˙µ«¬º---------------------------------*/
+void SPDS_Client::logout()
+{
+    this->token.clear();
+    setUserName();
+
+    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    {
+        QByteArray byteArray = JsonServer::toQByteArray(QuitData(token));
+        TcpSocket::write(byteArray);
+    }
+}
 
 /*---------------------------“≥√Ê«–ªª---------------------------------*/
 void SPDS_Client::on_leftMenuTreeWidget_itemClicked(QTreeWidgetItem* indexItem, qint32 itemID)

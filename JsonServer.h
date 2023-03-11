@@ -20,6 +20,7 @@ public:
 	static QByteArray toQByteArray(LoginData data);
 	static QByteArray toQByteArray(SPDOnceData data);
 	static QByteArray toQByteArray(GetSPDData data);
+	static QByteArray toQByteArray(QuitData data);
 	static QByteArray toHTTPQByteArray(SPDOnceData data);
 };
 

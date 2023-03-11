@@ -46,6 +46,8 @@ private:
     QVariant getUserToken();
     void createTokensTable(QSqlDatabase db);
     void autoLogin();
+    void logout();
+    void clearUserToken();
 
 private:
     enum Location
