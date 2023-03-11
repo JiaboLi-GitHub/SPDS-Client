@@ -82,7 +82,7 @@ QVector<SPDData> JsonServer::toSPDDataList(QByteArray& byteArray)
 SPDOnceData JsonServer::toSPDOnceData(QByteArray& byteArray)
 {
 	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
-	QJsonObject http_json = document.object();
+	QJsonObject http_json = document.object()["data"].toObject();
 
 	SPDOnceData data;
 	data.date = QDate::fromString(http_json["time"].toString(),"yyyy-MM-dd");
