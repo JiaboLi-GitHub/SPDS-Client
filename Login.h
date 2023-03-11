@@ -17,6 +17,7 @@ signals:
     void goEnroll();
     void setUserName(QString userName);
     void setUserToken(QString userName, QString token);
+    void closeWindow();
 
 public slots:
     bool on_login_clicked();

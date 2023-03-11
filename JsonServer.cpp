@@ -151,6 +151,16 @@ QByteArray JsonServer::toQByteArray(GetSPDData data)
 	return document.toBinaryData();
 }
 
+QByteArray JsonServer::toQByteArray(QuitData data)
+{
+	QJsonObject requestData_json, data_json;
+	data_json.insert("token", data.token);
+	requestData_json.insert("RequestType", TcpData::Quit_Request);
+	requestData_json.insert("data", data_json);
+	QJsonDocument document = QJsonDocument::QJsonDocument(requestData_json);
+	return document.toBinaryData();
+}
+
 
 QString  toBase64(QImage image)
 {

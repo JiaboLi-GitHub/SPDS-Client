@@ -99,8 +99,11 @@ public:
 class QuitData
 {
 public:
-	QuitData() {};
+	QuitData(QString token) :token(token) {};
 	~QuitData() {};
+
+public:
+	QString token;
 };
 
 class AutoLogInData 

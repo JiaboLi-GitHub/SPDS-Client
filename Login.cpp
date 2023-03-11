@@ -63,9 +63,11 @@ bool Login::on_login_clicked()
 
                     QString token = receivedData.token;
                     emit setUserToken(token, userName);
+
+                    emit closeWindow();
                 }
                 return true;
-
+                
             case LoginData::Login_Response::Account_Error:
                 QMessageBox::warning(NULL, u8"’À∫≈¥ÌŒÛ", u8"’À∫≈ªÚ√‹¬Î¥ÌŒÛ£°", QMessageBox::Ok);
                 break;

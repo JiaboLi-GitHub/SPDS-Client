@@ -115,6 +115,7 @@ bool Enroll::on_enroll_clicked()
             {
             case EnrollData::Enroll_Response::Enroll_Correct:
                 QMessageBox::warning(NULL, u8"注册成功", u8"注册成功！", QMessageBox::Ok);
+                on_login_clicked();
                 return true;
 
             case EnrollData::Enroll_Response::Exist_Error:

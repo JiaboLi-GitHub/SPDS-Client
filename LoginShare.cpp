@@ -41,6 +41,7 @@ void LoginShare::openLogin()
     connect(login, &Login::goEnroll, this, &LoginShare::openEnroll);
     connect(login, &Login::setUserName, (SPDS_Client*) this->parent(), &SPDS_Client::setUserName);
     connect(login, &Login::setUserToken, (SPDS_Client*) this->parent(), &SPDS_Client::setUserToken);
+    connect(login, &Login::closeWindow, this, &LoginShare::on_close_clicked);
     login->show();
 }
 
