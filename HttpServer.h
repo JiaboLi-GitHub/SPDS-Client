@@ -3,6 +3,9 @@
 #include <QHttpMultiPart>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include<qhttpmultipart.h>
+#include<qnetworkaccessmanager.h>
+#include<qnetworkreply.h>
 #include<qstring.h>
 #include"SPDData.h"
 

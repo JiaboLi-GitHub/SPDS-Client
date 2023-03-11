@@ -87,11 +87,11 @@
     <ClCompile Include="Visualization.cpp">
       <Filter>Widget Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="SPDData.cpp">
-      <Filter>SPDData</Filter>
-    </ClCompile>
     <ClCompile Include="HttpServer.cpp">
       <Filter>Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SPDS_Server\SPDData.cpp">
+      <Filter>Widget Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +123,7 @@
       <Filter>Tcp Socket</Filter>
     </QtMoc>
     <QtMoc Include="HttpServer.h">
-      <Filter>Module</Filter>
+      <Filter>Widget H</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -136,11 +136,11 @@
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="SPDData.h">
-      <Filter>SPDData</Filter>
-    </ClInclude>
     <ClInclude Include="TcpData.h">
       <Filter>Tcp Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SPDS_Server\SPDData.h">
+      <Filter>Widget H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
