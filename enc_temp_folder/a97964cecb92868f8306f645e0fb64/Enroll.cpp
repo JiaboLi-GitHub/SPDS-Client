@@ -104,7 +104,7 @@ bool Enroll::on_enroll_clicked()
 
     if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
-        QByteArray byteArray = JsonServer::toQByteArray(EnrollData(userName,mailAddress, password,code));
+        QByteArray byteArray = JsonServer::toQByteArray(EnrollData(mailAddress, password,userName,code));
         TcpSocket::write(byteArray);
 
         if (TcpSocket::isReceived())
