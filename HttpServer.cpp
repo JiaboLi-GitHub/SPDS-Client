@@ -4,7 +4,7 @@
 #include "ServerConfig.h"
 #include "Detection.h"
 
-const QString HttpServer::URL= "http://127.0.0.1:8989/image";
+const QString HttpServer::URL= "http://127.0.0.1:8989";
 
 HttpServer::HttpServer()
 {
@@ -29,7 +29,8 @@ void HttpServer::init()
 //ºÏ≤‚«Î«Û
 void HttpServer::post(SPDOnceData data)
 {
-	QByteArray byteArray = JsonServer::toHTTPQByteArray(data);
+    QByteArray byteArray = "image=";
+	byteArray.append(JsonServer::toHTTPQByteArray(data));
     qDebug() << byteArray;
 	QNetworkReply* reply = nam->post(*request, byteArray);
 }
