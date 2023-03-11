@@ -116,7 +116,7 @@ void Detection::_presentframe(QVideoFrame& frame)
     img = img.transformed(matrix);
 
     QDateTime currentTime = QDateTime::currentDateTime();
-    qDebug() << currentTime.msecsTo(lastTime);
+   
     if (currentTime.msecsTo(lastTime) < timeGap)
     {
         httpserver->post(SPDOnceData(currentTime.date(), img));
