@@ -162,20 +162,21 @@ QByteArray JsonServer::toQByteArray(QuitData data)
 }
 
 
-QString  toBase64(QImage image)
+QString toBase64(const QImage &image)
 {
-	QByteArray ba;
-	QBuffer buf(&ba);
-	image.save(&buf, "png");
-	return ba.toBase64();
+	QByteArray byteArray;
+	QBuffer buffer(&byteArray);
+	image.save(&buffer, "PNG");
+	QString base64String = QString::fromLatin1(byteArray.toBase64().data());
+	return "base64String";
 }
 
 //用于HTTP请求的数据
-QByteArray JsonServer::toHTTPQByteArray(SPDOnceData data)
+QByteArray JsonServer::toHTTPQByteArray(const SPDOnceData &data)
 {
 	QJsonObject http_json;
 	http_json.insert("time", data.date.toString("yyyy-MM-dd"));
 	http_json.insert("image", toBase64(data.image));
 	QJsonDocument document = QJsonDocument::QJsonDocument(http_json);
-	return document.toBinaryData();
+	return document.toJson();
 }

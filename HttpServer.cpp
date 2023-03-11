@@ -22,7 +22,7 @@ HttpServer::~HttpServer()
 
 void HttpServer::init()
 {
-    request->setUrl(QUrl(URL));    
+    request->setUrl(URL);    
     request->setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json;charset=utf-8"));
     connect(nam, &QNetworkAccessManager::finished, this, &HttpServer::resPost);
 }
@@ -30,11 +30,7 @@ void HttpServer::init()
 //ºÏ≤‚«Î«Û
 void HttpServer::post(SPDOnceData data)
 {
- 	auto byteArray=JsonServer::toHTTPQByteArray(data);
-    QFile file("C:\\Users\\LJB\\Desktop\\text.txt");
-    file.open(QIODevice::ReadOnly);
-
-    QByteArray imageBytes = file.readAll();
+    QByteArray imageBytes = JsonServer::toHTTPQByteArray(data);
    // qDebug() << byteArray;
 	QNetworkReply* reply = nam->post(*request, imageBytes);
 }
