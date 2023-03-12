@@ -51,6 +51,21 @@ Visualization::Visualization(QWidget* parent, QVector<SPDData> &dataList)
 
 	topieChartViewList(this->dataList);
 
+	/**²âÊÔ´úÂë**/
+	initListWidget(
+		listWidget, 5,
+		initQPieChartView("2023/2/14", 1080, 0, 0, 0, 0, 0),
+		initQPieChartView("2023/2/13", 15, 2, 3, 11, 4, 12),
+		initQPieChartView("2023/2/12", 15, 15, 35, 13, 45, 05),
+		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
+		/*initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
+		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
+		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),
+		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25),*/
+		initQPieChartView("2023/2/11", 19, 12, 65, 95, 26, 25)
+	);
+	/**²âÊÔ´úÂë**/
+
 	initListWidget(listWidget,pieChartViewList);
 }
 
@@ -62,13 +77,15 @@ Visualization::~Visualization()
 QChart* Visualization::initQLineChart()
 {
 	QLineSeries* series = new QLineSeries(this);
-	//series->append(0, 80);
-	//series->append(1, 60);
-	//series->append(2, 40);
-	//series->append(3, 60);
-	//series->append(4, 25);
-	//series->append(5, 90);
-	//series->append(6, 100);
+	/**²âÊÔ´úÂë**/
+	series->append(0, 80);
+	series->append(1, 60);
+	series->append(2, 40);
+	series->append(3, 60);
+	series->append(4, 25);
+	series->append(5, 90);
+	series->append(6, 100);
+	/**²âÊÔ´úÂë**/
 
 	QChart* chart = new QChart;
 	chart->setParent(this);
@@ -83,14 +100,16 @@ QChart* Visualization::initQLineChart()
 	chart->setAxisY(axisY, series);
 
 	QCategoryAxis* axisX = new QCategoryAxis(this);
-	//axisX->append("2022/01/01", 0);
-	//axisX->append("2022/01/02", 1);
-	//axisX->append("2022/01/03", 2);
-	//axisX->append("2022/01/04", 3);
-	//axisX->append("2022/01/05", 4);
-	//axisX->append("2022/01/06", 5);
-	//axisX->append("2022/01/07", 6);
-	//axisX->setRange(0, axisX->count()-1);
+	/**²âÊÔ´úÂë**/
+	axisX->append("2022/01/01", 0);
+	axisX->append("2022/01/02", 1);
+	axisX->append("2022/01/03", 2);
+	axisX->append("2022/01/04", 3);
+	axisX->append("2022/01/05", 4);
+	axisX->append("2022/01/06", 5);
+	axisX->append("2022/01/07", 6);
+	axisX->setRange(0, axisX->count()-1);
+	/**²âÊÔ´úÂë**/
 	axisX->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
 	
 
