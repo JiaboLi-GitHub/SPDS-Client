@@ -81,7 +81,7 @@ QVector<SPDData> JsonServer::toSPDDataList(QByteArray& byteArray)
 
 SPDOnceData JsonServer::toSPDOnceData(QByteArray& byteArray)
 {
-	QJsonDocument document = QJsonDocument::fromBinaryData(byteArray);
+	QJsonDocument document = QJsonDocument::fromJson(byteArray);
 	QJsonObject http_json = document.object()["data"].toObject();
 
 	SPDOnceData data;
@@ -166,9 +166,11 @@ QString toBase64(const QImage &image)
 {
 	QByteArray byteArray;
 	QBuffer buffer(&byteArray);
-	image.save(&buffer, "PNG");
-	QString base64String = QString::fromLatin1(byteArray.toBase64().data());
-	return "base64String";
+	//image.scaled(260, 140);
+	image.save(&buffer, "JPG",50);
+	QString base64String = u8"data:image/png;base64," + QString::fromLocal8Bit(byteArray.toBase64().data());
+	//qDebug() << base64String.size();
+	return base64String;
 }
 
 //用于HTTP请求的数据

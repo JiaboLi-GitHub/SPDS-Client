@@ -45,7 +45,7 @@ private:
     QImage img;
     QDateTime lastTime;
 
-    static const qint32 timeGap = 3000;//ºÏ≤‚º‰œ∂
+    static const qint32 timeGap = 10000;//ºÏ≤‚º‰œ∂
     //Module* module = NULL;
     //QThread* moduleThread = NULL;
 };

@@ -5,7 +5,7 @@
 #include "Detection.h"
 #include<qfile.h>
 
-const QString HttpServer::URL= "http://10.225.48.134:8989/image";
+const QString HttpServer::URL= "http://127.0.0.1:8989/image";
 
 HttpServer::HttpServer()
 {
@@ -39,9 +39,12 @@ void HttpServer::post(SPDOnceData data)
 void HttpServer::resPost(QNetworkReply* reply)
 {
 	QByteArray byteArray = reply->readAll();
+    qDebug() << byteArray;
 	SPDOnceData data = JsonServer::toSPDOnceData(byteArray);
+    qDebug() <<data.date.toString() << " " << data.result;
+    emit setStatus(data.result);
 
-    if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
+    /*if (TcpSocket::isConnected() || TcpSocket::connectToHost(ServerConfig::getServerIP(), 8888))
     {
         QByteArray byteArray = JsonServer::toQByteArray(data);
         TcpSocket::write(byteArray);
@@ -49,6 +52,7 @@ void HttpServer::resPost(QNetworkReply* reply)
         if (TcpSocket::isReceived())
         {
             emit setStatus(data.result);
+            qDebug() << data.result;
         }
-    }
+    }*/
 }
