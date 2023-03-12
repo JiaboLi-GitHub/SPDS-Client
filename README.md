@@ -28,5 +28,8 @@
 
 
 ## 展示
-![主页面](https://i.328888.xyz/2023/03/12/vVVNF.png)
-![可视化页面](https://i.328888.xyz/2023/03/12/vVDeC.md.png)
+  <img src="https://i.328888.xyz/2023/03/12/vVVNF.png" width="60%">  
+
+  <img src="https://i.328888.xyz/2023/03/12/vVDeC.md.png" width="60%">
+
+
