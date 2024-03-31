@@ -26,9 +26,4 @@
 
 
 ## 展示
-  <img src="https://i.328888.xyz/2023/03/12/vVVNF.png" width="80%">  
-
-  <img src="https://i.328888.xyz/2023/03/12/vVDeC.md.png" width="80%">
-
-
   ![SPDS主页面](GitHub/Img/SPDS主页面.png)
